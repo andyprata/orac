@@ -238,7 +238,9 @@ ash_channels = {
     # Thermal channels except 7.3 micron and 8.6 micron
     #"AHI" : "--use_channels 7 8 9 12 13 14 15 16"
     # Thermal channels except 3.9, 7.3 micron and 8.6 micron
-    "AHI" : "--use_channels 8 9 12 13 14 15 16"
+    #"AHI" : "--use_channels 8 9 12 13 14 15 16"
+    # Thermal channels except 3.9, 7.3, 8.6 and 9.6 micron
+    "AHI" : "--use_channels 8 9 13 14 15 16"
     }
 
 # Set ash retrievals
