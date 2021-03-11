@@ -236,7 +236,9 @@ ash_channels = {
     # Pavolonis et al. measurement vector (11, 11-12 and 11-13.3 micron)
     #"AHI" : "--use_channels ???" TODO: use channel BTDs in measurment vector
     # Thermal channels except 7.3 micron and 8.6 micron
-    "AHI" : "--use_channels 7 8 9 12 13 14 15 16"
+    #"AHI" : "--use_channels 7 8 9 12 13 14 15 16"
+    # Thermal channels except 3.9, 7.3 micron and 8.6 micron
+    "AHI" : "--use_channels 8 9 12 13 14 15 16"
     }
 
 # Set ash retrievals
