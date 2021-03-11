@@ -562,9 +562,11 @@ SETTINGS['ICE'] = ParticleType("ICE", sad="ICE_baum")
 # SETTINGS['EYJ'] = ParticleType("EYJ", sad="EYJ", inv=(Invpar('ITau', ap=0.3, sx=1e8),
 #                                                       Invpar('IRe', ap=5, sx=1e8)))
 # tau = 5; log10(tau) = 0.7
-SETTINGS['EYJ'] = ParticleType("EYJ", sad="EYJ", inv=(Invpar('ITau', ap=0.7, sx=1e8),
+# SETTINGS['EYJ'] = ParticleType("EYJ", sad="EYJ", inv=(Invpar('ITau', ap=0.7, sx=1e8),
+#                                                       Invpar('IRe', ap=5, sx=1e8)))
+# tau = 1; log10(tau) = 0.
+SETTINGS['EYJ'] = ParticleType("EYJ", sad="EYJ", inv=(Invpar('ITau', ap=0, sx=1e8),
                                                       Invpar('IRe', ap=5, sx=1e8)))
-
 
 # Settings for aerosol
 tau = Invpar('ITau', ap=-1.0, sx=1.5)
