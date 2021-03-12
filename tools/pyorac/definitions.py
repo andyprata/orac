@@ -535,6 +535,10 @@ class ParticleType():
             else:
                 fdr_name = join(fdr, inst.sensor.lower() + "_" + self.sad)
 
+                # For MATIN use this fdr_name
+                fdr_name = join(fdr, inst.sensor.lower() + "/" +
+                                inst.platform.upper() + "/" + self.sad)
+
             file_name = "_".join((inst.sensor+"*", self.name, "RBD", "Ch*.sad"))
 
             # SAD files stored in subdirectories
@@ -551,6 +555,8 @@ class ParticleType():
 SETTINGS = {}
 SETTINGS['WAT'] = ParticleType("WAT", sad="WAT")
 SETTINGS['ICE'] = ParticleType("ICE", sad="ICE_baum")
+SETTINGS['EYJ'] = ParticleType("EYJ", sad="EYJ", inv=(Invpar('ITau', ap=-0.3, sx=1e8),
+                                                      Invpar('IRe', ap=10, sx=1e8)))
 
 tau = Invpar('ITau', ap=-1.0, sx=1.5)
 SETTINGS['A70'] = ParticleType("A70", inv=(tau, Invpar('IRe', ap=0.0856, sx=0.15)))
