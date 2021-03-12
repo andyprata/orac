@@ -533,7 +533,8 @@ class ParticleType():
                 fdr_name = join(fdr, inst.sensor.lower() + "-" +
                                 inst.noaa + "_" + self.sad)
             else:
-                fdr_name = join(fdr, inst.sensor.lower() + "_" + self.sad)
+                # For JASMIN use this fdr_name
+                # fdr_name = join(fdr, inst.sensor.lower() + "_" + self.sad)
 
                 # For MATIN use this fdr_name
                 fdr_name = join(fdr, inst.sensor.lower() + "/" +
