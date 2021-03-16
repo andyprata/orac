@@ -220,7 +220,7 @@ ash_retrievals = {
 }
 ash_channels = {
     # Use all AHI channels
-    #"AHI" : "--use_channels 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16"
+    "AHI" : "--use_channels 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16"
     # 1.6 micron run (leave out 2.3 and 3.9 micron channels)
     #"AHI" : "--use_channels 1 2 3 4 5 8 9 10 11 12 13 14 15 16"
     # 2.3 micron run (leave out 1.6 and 3.9 micron channels)
@@ -230,7 +230,7 @@ ash_channels = {
     # 1.6 run without 7.3 micron (leave out 2.3, 3.9 and 7.3 micron channels)
     #"AHI" : "--use_channels 1 2 3 4 5 8 9 11 12 13 14 15 16"
     # 1.6 run without 6.9, 7.3 and 8.6 micron (leave out 2.3, 3.9, 6.9, 7.3 and 8.6)
-    "AHI" : "--use_channels 1 2 3 4 5 8 12 13 14 15 16"
+    #"AHI" : "--use_channels 1 2 3 4 5 8 12 13 14 15 16"
     # Prata AT channel selections (10.4, 11.2, 12.4 and 13.3 micron)
     #"AHI" : "--use_channels 13 14 15 16"
     # Francis et al. measurement vector (10.8, 12 and 13.4 micron)
