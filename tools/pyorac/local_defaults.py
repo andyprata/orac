@@ -216,7 +216,11 @@ ash_retrievals = {
     "wat_ash" : "--phase EYJ --ret_class ClsAshEyj --approach AppCld2L "
                 "--multilayer WAT ClsCldWat --sub_dir ash",
     "ice_ash" : "--phase EYJ --ret_class ClsAshEyj --approach AppCld2L "
-                "--multilayer ICE ClsCldIce --sub_dir ash"
+                "--multilayer ICE ClsCldIce --sub_dir ash",
+    "ash_wat" : "--phase WAT --ret_class ClsCldWat --approach AppCld2L "
+                "--multilayer EYJ ClsAshEyj --sub_dir ash",
+    "ash_ice" : "--phase ICE --ret_class ClsCldIce --approach AppCld2L "
+                "--multilayer EYJ ClsAshEyj --sub_dir ash"
 }
 ash_channels = {
     # Use all AHI channels
