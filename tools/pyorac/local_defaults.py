@@ -210,18 +210,26 @@ for sensor in cld_channels.keys():
     retrieval_settings[sensor] = retrieval_settings[sensor + "_C"]
 
 # Experimenting with volcanic ash retrievals
+# ash_retrievals = {
+#     "ash_cld" : "--phase EYJ --ret_class ClsAshEyj --approach AppCld1L "
+#                 "--sub_dir ash",
+#     "wat_ash" : "--phase EYJ --ret_class ClsAshEyj --approach AppCld2L "
+#                 "--multilayer WAT ClsCldWat --sub_dir ash",
+#     "ice_ash" : "--phase EYJ --ret_class ClsAshEyj --approach AppCld2L "
+#                 "--multilayer ICE ClsCldIce --sub_dir ash",
+#     "ash_wat" : "--phase WAT --ret_class ClsCldWat --approach AppCld2L "
+#                 "--multilayer EYJ ClsAshEyj --sub_dir ash",
+#     "ash_ice" : "--phase ICE --ret_class ClsCldIce --approach AppCld2L "
+#                 "--multilayer EYJ ClsAshEyj --sub_dir ash"
+# }
+
+# --multilayer PHS CLS sets the --phase and --ret_class
+# for the lower layer in a two-layer retrieval.
 ash_retrievals = {
-    "ash_cld" : "--phase EYJ --ret_class ClsAshEyj --approach AppCld1L "
-                "--sub_dir ash",
     "wat_ash" : "--phase EYJ --ret_class ClsAshEyj --approach AppCld2L "
                 "--multilayer WAT ClsCldWat --sub_dir ash",
-    "ice_ash" : "--phase EYJ --ret_class ClsAshEyj --approach AppCld2L "
-                "--multilayer ICE ClsCldIce --sub_dir ash",
-    "ash_wat" : "--phase WAT --ret_class ClsCldWat --approach AppCld2L "
-                "--multilayer EYJ ClsAshEyj --sub_dir ash",
-    "ash_ice" : "--phase ICE --ret_class ClsCldIce --approach AppCld2L "
-                "--multilayer EYJ ClsAshEyj --sub_dir ash"
 }
+
 ash_channels = {
     # Use all AHI channels
     "AHI" : "--use_channels 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16"
