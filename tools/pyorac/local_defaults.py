@@ -226,6 +226,8 @@ for sensor in cld_channels.keys():
 # --multilayer PHS CLS sets the --phase and --ret_class
 # for the lower layer in a two-layer retrieval.
 ash_retrievals = {
+    "ash_cld" : "--phase EYJ --ret_class ClsAshEyj --approach AppCld1L "
+                "--sub_dir ash",
     "wat_ash" : "--phase EYJ --ret_class ClsAshEyj --approach AppCld2L "
                 "--multilayer WAT ClsCldWat --sub_dir ash",
 }
@@ -276,8 +278,8 @@ for sensor, channels in ash_channels.items():
 # print('AHI_ASH')
 # print(retrieval_settings['AHI_ASH'])
 
-print('AHI_ASH_J')
-print(retrieval_settings['AHI_ASH_J'])
+# print('AHI_ASH_J')
+# print(retrieval_settings['AHI_ASH_J'])
 
 # ===== DEFAULT CHANNELS FOR EACH SENSOR =====
 
