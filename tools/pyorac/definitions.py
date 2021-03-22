@@ -555,8 +555,15 @@ class ParticleType():
 
 # Using non-imager LUTs and Baum properties at Greg's recommendation
 SETTINGS = {}
+
+# Standard WAT/ICE monochromatic LUTs
 SETTINGS['WAT'] = ParticleType("WAT", sad="WAT")
 SETTINGS['ICE'] = ParticleType("ICE", sad="ICE_baum")
+
+# Standard WAT/ICE band-integrated LUTs
+# SETTINGS['WAT'] = ParticleType("WAT", sad="WAT_srf")
+# SETTINGS['ICE'] = ParticleType("ICE", sad="ICE_baum_srf")
+
 SETTINGS['EYJ'] = ParticleType("EYJ", sad="EYJ", inv=(Invpar('ITau', ap=-0.3, sx=1e8),
                                                       Invpar('IRe', ap=10, sx=1e8)))
 #SETTINGS['EYJ'] = ParticleType("EYJ", sad="EYJ", inv=(Invpar('ITau', ap=0.18, sx=1.5),

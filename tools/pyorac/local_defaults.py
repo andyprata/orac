@@ -64,11 +64,11 @@ auxiliaries = {
                     'GAC_ori_0.05deg.nc',
     # Pre-defined geometry for geostationary imager
     'prelsm_file' : '/network/aopp/matin/eodg/shared/orac/data/predef_lsm/'
-                    #'MSG_000E_LSM.nc',  # SEVIRI
-                    'AHI_141E_LSM.nc',  # AHI
+                    'MSG_000E_LSM.nc',  # SEVIRI
+                    #'AHI_141E_LSM.nc',  # AHI
     'pregeo_file' : '/network/aopp/matin/eodg/shared/orac/data/predef_lsm/'
-                    #'MSG_000E_ANGLES.v01.nc',  # SEVIRI
-                    'AHI_141E_ANGLES.nc',  # AHI
+                    'MSG_000E_ANGLES.v01.nc',  # SEVIRI
+                    #'AHI_141E_ANGLES.nc',  # AHI
     # Climatology of Swansea s and p parameters
     'swansea_dir' : '/network/aopp/matin/eodg/atsr/swansea_cb'
 }
@@ -126,11 +126,11 @@ cld_channels = {
     "AVHRR" : "--use_channels 1 2 3 4 5 6",
     "MODIS" : "--use_channels 1 2 6 20 31 32",
     # Standard ORAC cloud channels
-    #"SEVIRI" : "--use_channels 1 2 3 4 9 10",
+    "SEVIRI" : "--use_channels 1 2 3 4 9 10",
     # All channels
     # "SEVIRI" : "--use_channels 1 2 3 4 5 6 7 9 10 11",
     # All channels without 3.9 micron
-    "SEVIRI" : "--use_channels 1 2 3 5 6 7 9 10 11",
+    #"SEVIRI" : "--use_channels 1 2 3 5 6 7 9 10 11",
     # Wang et al. (2016) thermal channels incl. 3.9 micron
     #"SEVIRI" : "--use_channels 4 5 6 7 9 10 11",
     "SLSTR" : "--use_channels 2 3 5 7 8 9",
