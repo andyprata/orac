@@ -67,7 +67,7 @@ auxiliaries = {
                     #'MSG_000E_LSM.nc',  # SEVIRI 0 degrees
                     'MSG_415E_LSM.nc',  # SEVIRI 41.5 degrees
                     #'AHI_141E_LSM.nc',  # AHI
-    'pregeo_file' : '/home/prataa/predef_geo/'#'/network/aopp/matin/eodg/shared/orac/data/predef_lsm/'
+    'pregeo_file' : '/home/prataa/data/predef_geo/'#'/network/aopp/matin/eodg/shared/orac/data/predef_lsm/'
                     #'MSG_000E_ANGLES.v01.nc',  # SEVIRI 0 degrees
                     'MSG_415E_ANGLES.v02.nc',  # SEVIRI 41.5 degrees
                     #'AHI_141E_ANGLES.nc',  # AHI
