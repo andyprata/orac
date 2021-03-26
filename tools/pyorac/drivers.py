@@ -329,9 +329,9 @@ USE_SWANSEA_CLIMATOLOGY={args.swansea}"""
 
     if args.File.predef and not args.no_predef:
         driver += f"""
-USE_PREDEF_LSM=False
+USE_PREDEF_LSM=True
 EXT_LSM_PATH={args.prelsm_file}
-USE_PREDEF_GEO=False
+USE_PREDEF_GEO=True
 EXT_GEO_PATH={args.pregeo_file}"""
 
     if args.product_name is not None:
