@@ -19,7 +19,8 @@ except KeyError:
     orac_lib = orac_dir + '/config/lib.inc'
 
 # Directory of look-up tables
-sad_dirs = ['/network/aopp/apres/ORAC_LUTS',
+sad_dirs = ['/network/aopp/apres/ORAC_LUTS',  # for standard channel configs
+            #'/home/prataa/data/ORAC_LUTS', # for development/modified configs
             '/network/aopp/matin/eodg/shared/SAD_Files/HIM',]
 
 # Use ECMWF data from the BADC/CEMS archive
@@ -232,8 +233,8 @@ for sensor in cld_channels.keys():
 ash_retrievals = {
     "ash_cld" : "--phase EYJ --ret_class ClsAshEyj --approach AppCld1L "
                 "--sub_dir ash",
-    "wat_ash" : "--phase EYJ --ret_class ClsAshEyj --approach AppCld2L "
-                "--multilayer WAT ClsCldWat --sub_dir ash",
+    # "wat_ash" : "--phase EYJ --ret_class ClsAshEyj --approach AppCld2L "
+    #             "--multilayer WAT ClsCldWat --sub_dir ash",
 }
 
 ash_channels = {
