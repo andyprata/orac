@@ -242,9 +242,9 @@ ash_channels = {
     # Use all AHI channels
     #"AHI" : "--use_channels 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16"
     # RAL channels
-    "AHI" : "--use_channels 8 10 11 14 15 16"
+    #"AHI" : "--use_channels 8 10 11 14 15 16"
     # RAL channels extended
-    #"AHI" : "--use_channels 8 9 10 11 13 14 15 16"
+    "AHI" : "--use_channels 8 9 10 11 13 14 15 16"
     # 3.9 micron run (leave out 1.6 and 2.3 micron channels)
     #"AHI" : "--use_channels 1 2 3 4 7 8 9 10 11 12 13 14 15 16"
     # 1.6 run without 7.3 micron (leave out 2.3, 3.9 and 7.3 micron channels)
