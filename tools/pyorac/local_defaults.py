@@ -19,8 +19,8 @@ except KeyError:
     orac_lib = orac_dir + '/config/lib.inc'
 
 # Directory of look-up tables
-sad_dirs = [#'/network/aopp/apres/ORAC_LUTS',  # for standard channel configs
-            '/home/prataa/data/ORAC_LUTS', # for development/modified AHI configs
+sad_dirs = ['/network/aopp/apres/ORAC_LUTS',  # for standard channel configs
+            #'/home/prataa/data/ORAC_LUTS', # for development/modified AHI configs
             '/network/aopp/matin/eodg/shared/SAD_Files/HIM',]
 
 # Use ECMWF data from the BADC/CEMS archive
@@ -240,11 +240,11 @@ ash_retrievals = {
 
 ash_channels = {
     # Use all AHI channels
-    "AHI" : "--use_channels 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16"
-    # 1.6 micron run (leave out 2.3 and 3.9 micron channels)
-    #"AHI" : "--use_channels 1 2 3 4 5 8 9 10 11 12 13 14 15 16"
-    # 2.3 micron run (leave out 1.6 and 3.9 micron channels)
-    #"AHI" : "--use_channels 1 2 3 4 6 8 9 10 11 12 13 14 15 16"
+    #"AHI" : "--use_channels 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16"
+    # RAL channels
+    "AHI" : "--use_channels 8 10 11 14 15 16"
+    # RAL channels extended
+    #"AHI" : "--use_channels 8 9 10 11 13 14 15 16"
     # 3.9 micron run (leave out 1.6 and 2.3 micron channels)
     #"AHI" : "--use_channels 1 2 3 4 7 8 9 10 11 12 13 14 15 16"
     # 1.6 run without 7.3 micron (leave out 2.3, 3.9 and 7.3 micron channels)
