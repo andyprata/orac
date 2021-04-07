@@ -20,8 +20,8 @@ except KeyError:
 
 # Directory of look-up tables
 sad_dirs = [#'/network/aopp/apres/ORAC_LUTS',  # for standard channel configs
-            #'/home/prataa/data/ORAC_LUTS', # for development/modified AHI configs
-            '/network/aopp/matin/eodg/shared/SAD_Files/HIM',]
+            '/home/prataa/data/ORAC_LUTS',] # for development of ash AHI measurement covariances
+            #'/network/aopp/matin/eodg/shared/SAD_Files/HIM',]
 
 # Use ECMWF data from the BADC/CEMS archive
 ecmwf_flag  = 5
