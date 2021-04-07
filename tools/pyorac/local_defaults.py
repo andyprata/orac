@@ -277,7 +277,7 @@ for sensor, channels in ash_channels.items():
         channels + " " + ret for ret in ash_retrievals.values()
     ])
 
-# 'AHI_ASH': ['--use_channels 1 2 3 4 5 8 9 11 12 13 14 15 16 --phase EYJ --ret_class ClsAshEyj --approach AppCld1l --sub_dir ash',
+# 'AHI_ASH': ['--use_channels 1 2 3 4 5 8 9 11 12 13 14 15 16 --phase EYJ --ret_class ClsAshEyj --approach AppCld1L --sub_dir ash',
 # 						'--use_channels 1 2 3 4 5 8 9 11 12 13 14 15 16 --phase EYJ --ret_class ClsCldEyj --approach AppCld2L --multilayer WAT ClsCldWat --sub_dir ash',]
 # 						#'--use_channels 1 2 3 4 5 8 9 11 12 13 14 15 16 --phase EYJ --ret_class ClsCldEyj --approach AppCld2L --multilayer ICE ClsCldIce --sub_dir ash']
 
