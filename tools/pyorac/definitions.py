@@ -545,6 +545,8 @@ class ParticleType:
         from glob import glob
         from os.path import join
 
+        print('--- MADE IT HERE ---')
+
         for fdr in sad_dirs:
             if "AVHRR" in inst.sensor:
                 fdr_name = join(fdr, inst.sensor.lower() + "-" +
@@ -554,8 +556,7 @@ class ParticleType:
             else:
                 file_name = "_".join((inst.platform.lower(), inst.sensor.lower(),
                                       self.name + ".nc"))
-                print(file_name)
-                
+
             # SAD files stored in subdirectories
             if glob(join(fdr_name, file_name)):
                 return fdr_name
