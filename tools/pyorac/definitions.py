@@ -551,6 +551,14 @@ class ParticleType:
             if "AVHRR" in inst.sensor:
                 fdr_name = join(fdr, inst.sensor.lower() + "-" +
                                 inst.noaa + "_" + self.sad)
+            else:
+                # For JASMIN use this fdr_name
+                # fdr_name = join(fdr, inst.sensor.lower() + "_" + self.sad)
+
+                # For MATIN use this fdr_name
+                fdr_name = join(fdr, inst.sensor.lower() + "/" +
+                                inst.platform.upper() + "/" + self.sad)
+
             print(self.name)
             if len(self.name) == 3:
                 file_name = "_".join((inst.inst, self.name, "RBD", "Ch*.sad"))
