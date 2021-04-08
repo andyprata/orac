@@ -83,7 +83,8 @@ subroutine Read_SAD(Ctrl, platform, sensor, SAD_Chan, SAD_LUT)
       call Read_NCDF_SAD_LUT(Ctrl, platform, sensor, Ctrl%LUTClass, &
                              SAD_LUT(1), SAD_Chan)
       if (Ctrl%Approach == AppCld2L) then
-         call Read_NCDF_SAD_LUT(Ctrl, platform, Ctrl%LUTClass2, SAD_LUT(2))
+         call Read_NCDF_SAD_LUT(Ctrl, platform, sensor, Ctrl%LUTClass2, &
+                                SAD_LUT(2))
       end if
    end if
 
