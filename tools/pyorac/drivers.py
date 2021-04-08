@@ -346,6 +346,7 @@ def build_main_driver(args):
 
     print(args.sad_dirs)
     print(args.File.sensor)
+    print(args.phase)
 
     # Form mandatory driver file lines
     driver = """# ORAC New Driver File
