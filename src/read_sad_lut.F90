@@ -901,7 +901,7 @@ subroutine sad_dimension_read_nc(fid, filename, name, Grid)
 end subroutine sad_dimension_read_nc
 
 
-subroutine Read_NCDF_SAD_LUT(Ctrl, platform, LUTClass, SAD_LUT, SAD_Chan)
+subroutine Read_NCDF_SAD_LUT(Ctrl, platform, sensor, LUTClass, SAD_LUT, SAD_Chan)
 
    use Ctrl_m
    use orac_ncdf_m
@@ -913,6 +913,7 @@ subroutine Read_NCDF_SAD_LUT(Ctrl, platform, LUTClass, SAD_LUT, SAD_Chan)
 
    type(Ctrl_t),               intent(in)    :: Ctrl
    character(len=*),           intent(in)    :: platform
+   character(len=*),           intent(in)    :: sensor
    character(len=*),           intent(in)    :: LUTClass
    type(SAD_LUT_t),            intent(inout) :: SAD_LUT
    type(SAD_Chan_t), optional, intent(inout) :: SAD_Chan(:)
