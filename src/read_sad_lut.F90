@@ -940,8 +940,6 @@ subroutine Read_NCDF_SAD_LUT(Ctrl, platform, LUTClass, SAD_LUT, SAD_Chan)
    ! Determine filename and open file
    filename = trim(Ctrl%FID%SAD_Dir) // '/' // lower(trim(platform)) // '_' // &
               lower(trim(Ctrl%InstName)) // '_' // trim(LUTClass) // '.nc'
-   ! Debugging
-   print*, 'LUT filename: ', trim(filename)
 
    if (Ctrl%verbose) print*, 'LUT filename: ', trim(filename)
    call ncdf_open(fid, filename, 'Read_NCDF_SAD_LUT')
