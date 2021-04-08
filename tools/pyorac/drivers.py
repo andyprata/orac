@@ -344,9 +344,9 @@ def build_main_driver(args):
     """Prepare a driver file for the main processor."""
     from pyorac.definitions import SETTINGS
 
-    print(args.sad_dirs)
-    print(args.File.sensor)
-    print(args.phase)
+    print(args.sad_dirs)  # ['/home/prataa/data/ORAC_LUTS_nc']
+    print(args.File.sensor)  # AHI
+    print(args.phase)  # WAT
 
     # Form mandatory driver file lines
     driver = """# ORAC New Driver File

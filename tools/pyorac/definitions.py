@@ -545,17 +545,20 @@ class ParticleType:
         from glob import glob
         from os.path import join
 
-        print(sad_dirs)
+        print(sad_dirs)  # ['/home/prataa/data/ORAC_LUTS_nc']
 
         for fdr in sad_dirs:
             if "AVHRR" in inst.sensor:
                 fdr_name = join(fdr, inst.sensor.lower() + "-" +
                                 inst.noaa + "_" + self.sad)
+            print(self.name)
             if len(self.name) == 3:
                 file_name = "_".join((inst.inst, self.name, "RBD", "Ch*.sad"))
+                print(file_name)
             else:
                 file_name = "_".join((inst.platform.lower(), inst.sensor.lower(),
                                       self.name + ".nc"))
+                print(file_name)
 
             # SAD files stored in subdirectories
             if glob(join(fdr_name, file_name)):
