@@ -554,7 +554,8 @@ class ParticleType:
             else:
                 file_name = "_".join((inst.platform.lower(), inst.sensor.lower(),
                                       self.name + ".nc"))
-
+                print(file_name)
+                
             # SAD files stored in subdirectories
             if glob(join(fdr_name, file_name)):
                 return fdr_name
