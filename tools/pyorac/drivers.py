@@ -344,6 +344,9 @@ def build_main_driver(args):
     """Prepare a driver file for the main processor."""
     from pyorac.definitions import SETTINGS
 
+    print(args.sad_dirs)
+    print(args.File)
+
     # Form mandatory driver file lines
     driver = """# ORAC New Driver File
 Ctrl%FID%Data_Dir           = "{in_dir}"
