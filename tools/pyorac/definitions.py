@@ -564,13 +564,13 @@ SETTINGS = {}
 SETTINGS['WAT'] = ParticleType("WAT", sad="WAT_srf")
 SETTINGS['ICE'] = ParticleType("ICE", sad="ICE_baum_srf")
 
-# My first attempt settings
-#SETTINGS['EYJ'] = ParticleType("EYJ", sad="EYJ", inv=(Invpar('ITau', ap=-0.3, sx=1e8),
-#                                                      Invpar('IRe', ap=10, sx=1e8)))
+# My settings
+SETTINGS['EYJ'] = ParticleType("EYJ", sad="EYJ", inv=(Invpar('ITau', ap=-0.3, sx=1e3),
+                                                      Invpar('IRe', ap=5, sx=1e3)))
 
 # RAL apriori settings
-SETTINGS['EYJ'] = ParticleType("EYJ", sad="EYJ", inv=(Invpar('ITau', ap=-1.0, sx=1e3),
-                                                      Invpar('IRe', ap=0.8, sx=1.0)))
+#SETTINGS['EYJ'] = ParticleType("EYJ", sad="EYJ", inv=(Invpar('ITau', ap=-1.0, sx=1e3),
+#                                                      Invpar('IRe', ap=0.8, sx=1.0)))
 
 # Original ORAC settings
 #SETTINGS['EYJ'] = ParticleType("EYJ", sad="EYJ", inv=(Invpar('ITau', ap=0.18, sx=1.5),
