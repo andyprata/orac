@@ -50,6 +50,7 @@ subroutine Read_SAD(Ctrl, platform, SAD_Chan, SAD_LUT)
    use ORAC_Constants_m
    use SAD_Chan_m
    use SAD_LUT_m
+   use system_utils_m, only: lower
 
    implicit none
 
