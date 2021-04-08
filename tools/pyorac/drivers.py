@@ -345,7 +345,7 @@ def build_main_driver(args):
     from pyorac.definitions import SETTINGS
 
     print(args.sad_dirs)
-    print(args.File)
+    print(args.File.sensor)
 
     # Form mandatory driver file lines
     driver = """# ORAC New Driver File
