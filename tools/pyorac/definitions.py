@@ -565,7 +565,7 @@ class ParticleType:
                 print(file_name)
             else:
                 file_name = "_".join((inst.platform.lower(), inst.sensor.lower(),
-                                      self.name + ".nc"))
+                                      "m_" + self.name + "_a01_pold_v03.nc"))
                 print(file_name)
 
             # SAD files stored in subdirectories
@@ -582,7 +582,7 @@ class ParticleType:
 # Using non-imager LUTs and Baum properties at Greg's recommendation
 SETTINGS = {}
 #SETTINGS['WAT'] = ParticleType("WAT", sad="WAT")
-SETTINGS['WAT'] = ParticleType("m_liquid-water_a01_pold_v03", sad="WAT")
+SETTINGS['WAT'] = ParticleType("liquid-water", sad="WAT")
 
 SETTINGS['ICE'] = ParticleType("ICE", sad="ICE_baum")
 
