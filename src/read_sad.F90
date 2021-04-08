@@ -72,6 +72,12 @@ subroutine Read_SAD(Ctrl, platform, SAD_Chan, SAD_LUT)
       end if
    else
       ! New NetCDF LUTs
+
+      ! Debugging
+      filename = trim(Ctrl%FID%SAD_Dir) // '/' // lower(trim(platform)) // '_' // &
+                 lower(trim(Ctrl%InstName)) // '_' // trim(Ctrl%LUTClass) // '.nc'
+      print*, 'LUT filename: ', trim(filename)
+      
       call Read_NCDF_SAD_LUT(Ctrl, platform, Ctrl%LUTClass, SAD_LUT(1), SAD_Chan)
       if (Ctrl%Approach == AppCld2L) then
          call Read_NCDF_SAD_LUT(Ctrl, platform, Ctrl%LUTClass2, SAD_LUT(2))
