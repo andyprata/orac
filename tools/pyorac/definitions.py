@@ -545,7 +545,7 @@ class ParticleType:
         from glob import glob
         from os.path import join
 
-        print('--- MADE IT HERE ---')
+        print(fdr)
 
         for fdr in sad_dirs:
             if "AVHRR" in inst.sensor:
