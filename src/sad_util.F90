@@ -119,7 +119,6 @@ subroutine map_ch_indices(nreq, required_ind, npro, provided_ind, map)
    print *, 'required_ind=', required_ind
    print *, 'npro=', npro
    print *, 'provided_ind=', provided_ind
-   print *, 'map=', map
 
    map = 0
    do i = 1, nreq
@@ -136,6 +135,7 @@ subroutine map_ch_indices(nreq, required_ind, npro, provided_ind, map)
          stop error_stop_code
       end if
    end do
+   print *, 'map=', map
 
 end subroutine map_ch_indices
 

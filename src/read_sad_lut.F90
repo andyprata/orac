@@ -961,9 +961,9 @@ subroutine Read_NCDF_SAD_LUT(Ctrl, platform, sensor, LUTClass, SAD_LUT, SAD_Chan
       print *, 'Ctrl%Ind%Y_id(Ctrl%Ind%YSolar)=', Ctrl%Ind%Y_id(Ctrl%Ind%YSolar)
       print *, 'nsolar=', nsolar
       print *, 'solar_ch_numbers=', solar_ch_numbers
-      print *, 'solar_indices=', solar_indices
       call map_ch_indices(Ctrl%Ind%NSolar, Ctrl%Ind%Y_id(Ctrl%Ind%YSolar), &
            nsolar, solar_ch_numbers, solar_indices)
+      print *, 'solar_indices=', solar_indices
       print *, '--- DONE WITH IF STATEMENT ---'
    end if
    print *, '--- DONE ---'
@@ -979,9 +979,9 @@ subroutine Read_NCDF_SAD_LUT(Ctrl, platform, sensor, LUTClass, SAD_LUT, SAD_Chan
       print *, 'Ctrl%Ind%Y_id(Ctrl%Ind%YThermal)=', Ctrl%Ind%Y_id(Ctrl%Ind%YThermal)
       print *, 'nthermal=', nthermal
       print *, 'thermal_ch_numbers=', thermal_ch_numbers
-      print *, 'thermal_indices=', thermal_indices
       call map_ch_indices(Ctrl%Ind%NThermal, Ctrl%Ind%Y_id(Ctrl%Ind%YThermal), &
            nthermal, thermal_ch_numbers, thermal_indices)
+      print *, 'thermal_indices=', thermal_indices
       print *, '--- DONE WITH IF STATEMENT ---'
    end if
    print *, '--- DONE ---'
@@ -1005,9 +1005,9 @@ subroutine Read_NCDF_SAD_LUT(Ctrl, platform, sensor, LUTClass, SAD_LUT, SAD_Chan
       print *, 'Ctrl%Ind%Y_id(Ctrl%Ind%YMixed)=', Ctrl%Ind%Y_id(Ctrl%Ind%YMixed)
       print *, 'nmixed=', nmixed
       print *, 'mixed_ch_numbers=', mixed_ch_numbers
-      print *, 'mixed_indices=', mixed_indices
       call map_ch_indices(Ctrl%Ind%NMixed, Ctrl%Ind%Y_id(Ctrl%Ind%YMixed), &
            nmixed, mixed_ch_numbers, mixed_indices)
+      print *, 'mixed_indices=', mixed_indices
       print *, '--- DONE WITH IF STATEMENT ---'
    end if
    print *, '--- DONE ---'
