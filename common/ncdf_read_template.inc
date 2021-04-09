@@ -7,7 +7,7 @@ subroutine NCDF_READ_NAME_0D(ncid, name, val)
 
    integer                                  :: ierr, vid
    logical                                  :: fv_flag, vr_flag
-   character(len=unitlength)                :: unit
+   !character(len=unitlength)                :: unit
    NCDF_READ_TYPE(kind=NCDF_READ_KIND)      :: fv, sf, of, vmin, vmax
    NCDF_READ_TYPE(kind=NCDF_READ_KIND)      :: fill=NCDF_READ_FILL_VALUE
 
