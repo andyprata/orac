@@ -971,7 +971,10 @@ subroutine Read_NCDF_SAD_LUT(Ctrl, platform, sensor, LUTClass, SAD_LUT, SAD_Chan
    ! Debugging
    print *, '--- UP TO MIXED CHANNELS ---'
    print *, nmixed
-   if (nmixed > 0) then
+   ! We only attempt to read in the channels if the requested number
+   ! of mixed channels is greater than 0
+   if (Ctrl%Ind%NMixed > 0) then
+   !if (nmixed > 0) then
      print *, '--- MADE IT INTO IF STATEMENT ---'
       allocate(mixed_ch_numbers(nmixed))
       print *, mixed_ch_numbers(nmixed)
@@ -986,8 +989,9 @@ subroutine Read_NCDF_SAD_LUT(Ctrl, platform, sensor, LUTClass, SAD_LUT, SAD_Chan
       print *, 'mixed_indices=', mixed_indices
       call map_ch_indices(Ctrl%Ind%NMixed, Ctrl%Ind%Y_id(Ctrl%Ind%YMixed), &
            nmixed, mixed_ch_numbers, mixed_indices)
-      print *, '--- DONE ---'
+      print *, '--- DONE WITH IF STATEMENT ---'
    end if
+   print *, '--- DONE ---'
 
    ! Representative channel wavelengths
    allocate(SAD_LUT%Wavelength(Ctrl%Ind%Ny))
