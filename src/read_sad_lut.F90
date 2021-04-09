@@ -975,9 +975,14 @@ subroutine Read_NCDF_SAD_LUT(Ctrl, platform, sensor, LUTClass, SAD_LUT, SAD_Chan
      print *, '--- MADE IT INTO IF STATEMENT ---'
      print *, mixed_ch_numbers(nmixed)
       allocate(mixed_ch_numbers(nmixed))
+      print *, '--- ENTERING ncdf_read_array ---'
       call ncdf_read_array(fid, "mixed_channel_id", mixed_ch_numbers)
+      print *, '---  DONE ---'
+      print *, mixed_ch_numbers
+      print *, '--- ENTERING map_ch_indices ---'
       call map_ch_indices(Ctrl%Ind%NMixed, Ctrl%Ind%Y_id(Ctrl%Ind%YMixed), &
            nmixed, mixed_ch_numbers, mixed_indices)
+      print *, '--- DONE ---'
    end if
 
    ! Representative channel wavelengths
