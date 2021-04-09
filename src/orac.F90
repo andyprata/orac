@@ -328,6 +328,11 @@ subroutine orac(mytask,ntasks,lower_bound,upper_bound,drifile)
    ! parameters and read the SAD values.
    allocate(SAD_Chan(Ctrl%Ind%Ny))
 
+   ! Debugging
+   print*, 'LUT filename: ', trim(trim(Ctrl%FID%SAD_Dir) // '/' //  &
+   lower(trim(global_atts%platform)) // '_' // lower(trim(global_atts%sensor)) &
+   // '_' // trim(Ctrl%LUTClass) // '.nc')
+
    call Read_SAD(Ctrl, global_atts%platform, global_atts%sensor, &
                  SAD_Chan, SAD_LUT)
 
