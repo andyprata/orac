@@ -209,6 +209,9 @@ subroutine orac(mytask,ntasks,lower_bound,upper_bound,drifile)
    use global_attributes_m
    use source_attributes_m
 
+   use system_utils_m, only: lower
+
+
    ! Local variable declarations
 
    implicit none
