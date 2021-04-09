@@ -124,7 +124,8 @@ subroutine map_ch_indices(nreq, required_ind, npro, provided_ind, map)
    do i = 1, nreq
       do j = 1, npro
          if (required_ind(i) == provided_ind(j)) then
-            map(i) = j
+            ! map(i) = j
+            map(i) = provided_ind(j)
             exit
          end if
       end do
