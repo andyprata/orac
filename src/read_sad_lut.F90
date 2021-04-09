@@ -951,21 +951,40 @@ subroutine Read_NCDF_SAD_LUT(Ctrl, platform, sensor, LUTClass, SAD_LUT, SAD_Chan
    call ncdf_read_array(fid, "channel_id", ch_numbers)
    call map_ch_indices(Ctrl%Ind%Ny, Ctrl%Ind%Y_id, nch, ch_numbers, ch_indices)
 
+   print *, '--- UP TO SOLAR CHANNELS ---'
    nsolar = ncdf_dim_length(fid, 'solar_channels', 'Read_NCDF_SAD_LUT')
    if (nsolar > 0) then
       allocate(solar_ch_numbers(nsolar))
       call ncdf_read_array(fid, "solar_channel_id", solar_ch_numbers)
+      print *, '--- ENTERING map_ch_indices ---'
+      print *, 'Ctrl%Ind%NSolar=', Ctrl%Ind%NSolar
+      print *, 'Ctrl%Ind%Y_id(Ctrl%Ind%YSolar)=', Ctrl%Ind%Y_id(Ctrl%Ind%YSolar)
+      print *, 'nsolar=', nsolar
+      print *, 'solar_ch_numbers=', solar_ch_numbers
+      print *, 'solar_indices=', solar_indices
       call map_ch_indices(Ctrl%Ind%NSolar, Ctrl%Ind%Y_id(Ctrl%Ind%YSolar), &
            nsolar, solar_ch_numbers, solar_indices)
+      print *, '--- DONE WITH IF STATEMENT ---'
    end if
+   print *, '--- DONE ---'
 
+   print *, '--- UP TO THERMAL CHANNELS ---'
    nthermal = ncdf_dim_length(fid, 'thermal_channels', 'Read_NCDF_SAD_LUT')
    if (nthermal > 0) then
+      print *, '--- MADE IT INTO IF STATEMENT ---'
       allocate(thermal_ch_numbers(nthermal))
       call ncdf_read_array(fid, "thermal_channel_id", thermal_ch_numbers)
+      print *, '--- ENTERING map_ch_indices ---'
+      print *, 'Ctrl%Ind%NThermal=', Ctrl%Ind%NThermal
+      print *, 'Ctrl%Ind%Y_id(Ctrl%Ind%YThermal)=', Ctrl%Ind%Y_id(Ctrl%Ind%YThermal)
+      print *, 'nthermal=', nthermal
+      print *, 'thermal_ch_numbers=', thermal_ch_numbers
+      print *, 'thermal_indices=', thermal_indices
       call map_ch_indices(Ctrl%Ind%NThermal, Ctrl%Ind%Y_id(Ctrl%Ind%YThermal), &
            nthermal, thermal_ch_numbers, thermal_indices)
+      print *, '--- DONE WITH IF STATEMENT ---'
    end if
+   print *, '--- DONE ---'
 
    nmixed = ncdf_dim_length(fid, 'mixed_channels', 'Read_NCDF_SAD_LUT')
    ! Debugging
@@ -975,7 +994,7 @@ subroutine Read_NCDF_SAD_LUT(Ctrl, platform, sensor, LUTClass, SAD_LUT, SAD_Chan
    ! of mixed channels is greater than 0
    if (Ctrl%Ind%NMixed > 0) then
    !if (nmixed > 0) then
-     print *, '--- MADE IT INTO IF STATEMENT ---'
+      print *, '--- MADE IT INTO IF STATEMENT ---'
       allocate(mixed_ch_numbers(nmixed))
       print *, mixed_ch_numbers(nmixed)
       print *, '--- ENTERING ncdf_read_array ---'
