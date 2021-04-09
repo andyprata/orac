@@ -26,7 +26,8 @@ FFLAGS    = -O3 -cpp -ffree-line-length-0 -g
 # Uncomment if OpenMP support is desired. Highly recommented.
 FFLAGS   += -fopenmp
 # Uncomment if extra warnings are required.  Take out -Werror if that annoys you.
-FFLAGS   += -Wall -Werror -Wno-conversion -Wno-uninitialized -Wno-unused-dummy-argument -Wtabs
+#FFLAGS   += -Wall -Werror -Wno-conversion -Wno-uninitialized -Wno-unused-dummy-argument -Wtabs
+FFLAGS   += -Wall -Wno-conversion -Wno-uninitialized -Wno-unused-dummy-argument -Wtabs
 
 LFLAGS = -fopenmp
 
