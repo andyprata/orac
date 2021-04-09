@@ -973,8 +973,8 @@ subroutine Read_NCDF_SAD_LUT(Ctrl, platform, sensor, LUTClass, SAD_LUT, SAD_Chan
    print *, nmixed
    if (nmixed > 0) then
      print *, '--- MADE IT INTO IF STATEMENT ---'
-     print *, mixed_ch_numbers(nmixed)
       allocate(mixed_ch_numbers(nmixed))
+      print *, mixed_ch_numbers(nmixed)
       print *, '--- ENTERING ncdf_read_array ---'
       call ncdf_read_array(fid, "mixed_channel_id", mixed_ch_numbers)
       print *, '---  DONE ---'
