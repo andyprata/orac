@@ -115,6 +115,12 @@ subroutine map_ch_indices(nreq, required_ind, npro, provided_ind, map)
    integer, intent(inout) :: map(:)
    integer :: i, j
 
+   print *, 'nreq=', nreq
+   print *, 'required_ind=', required_ind
+   print *, 'npro=', npro
+   print *, 'provided_ind=', provided_ind
+   print *, 'map=', map
+
    map = 0
    do i = 1, nreq
       do j = 1, npro
