@@ -1205,7 +1205,8 @@ subroutine Read_NCDF_SAD_LUT(Ctrl, platform, sensor, LUTClass, SAD_LUT, SAD_Chan
       deallocate(chan_tmp_real)
    end if
 
-   if (nmixed > 0) then
+   if (Ctrl%Ind%NMixed > 0) then
+   ! if (nmixed > 0) then
       allocate(chan_tmp_real(nmixed))
       call ncdf_read_array(fid, "F0", chan_tmp_real)
       do i = 1, Ctrl%Ind%NMixed
