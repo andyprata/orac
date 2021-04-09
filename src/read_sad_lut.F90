@@ -968,7 +968,12 @@ subroutine Read_NCDF_SAD_LUT(Ctrl, platform, sensor, LUTClass, SAD_LUT, SAD_Chan
    end if
 
    nmixed = ncdf_dim_length(fid, 'mixed_channels', 'Read_NCDF_SAD_LUT')
+   ! Debugging
+   print *, '--- UP TO MIXED CHANNELS ---'
+   print *, nmixed
    if (nmixed > 0) then
+     print *, '--- MADE IT INTO IF STATEMENT ---'
+     print(mixed_ch_numbers(nmixed))
       allocate(mixed_ch_numbers(nmixed))
       call ncdf_read_array(fid, "mixed_channel_id", mixed_ch_numbers)
       call map_ch_indices(Ctrl%Ind%NMixed, Ctrl%Ind%Y_id(Ctrl%Ind%YMixed), &
