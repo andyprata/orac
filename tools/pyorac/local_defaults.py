@@ -19,10 +19,10 @@ except KeyError:
     orac_lib = orac_dir + '/config/lib.inc'
 
 # Directory of look-up tables
-sad_dirs = [#'/network/aopp/apres/ORAC_LUTS',  # for standard channel configs
+sad_dirs = ['/network/aopp/apres/ORAC_LUTS',]  # for standard channel configs
             #'/home/prataa/data/ORAC_LUTS',] # for development of ash AHI measurement covariances
-            '/home/prataa/data/ORAC_LUTS_nc',] # testing new netcdf LUTs
-            #'/network/aopp/matin/eodg/shared/SAD_Files/HIM',]
+            #'/home/prataa/data/ORAC_LUTS_nc',] # testing new netcdf LUTs
+            #'/network/aopp/matin/eodg/shared/SAD_Files/HIM',] # for standard ash LUTs
 
 # Use ECMWF data from the BADC/CEMS archive
 ecmwf_flag  = 5
@@ -133,9 +133,9 @@ cld_channels = {
     "AVHRR" : "--use_channels 1 2 3 4 5 6",
     "MODIS" : "--use_channels 1 2 6 20 31 32",
     # Standard ORAC cloud channels
-    #"SEVIRI" : "--use_channels 1 2 3 4 9 10",
+    "SEVIRI" : "--use_channels 1 2 3 4 9 10",
     # All channels
-     "SEVIRI" : "--use_channels 1 2 3 4 5 6 7 9 10 11",
+    # "SEVIRI" : "--use_channels 1 2 3 4 5 6 7 9 10 11",
     # All channels without 3.9 micron
     #"SEVIRI" : "--use_channels 1 2 3 5 6 7 9 10 11",
     # Wang et al. (2016) thermal channels incl. 3.9 micron
