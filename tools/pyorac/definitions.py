@@ -581,8 +581,8 @@ class ParticleType:
 
 # Using non-imager LUTs and Baum properties at Greg's recommendation
 SETTINGS = {}
-#SETTINGS['WAT'] = ParticleType("WAT", sad="WAT")
-SETTINGS['WAT'] = ParticleType("liquid-water", sad="WAT")
+SETTINGS['WAT'] = ParticleType("WAT", sad="WAT")
+#SETTINGS['WAT'] = ParticleType("liquid-water", sad="WAT")
 
 SETTINGS['ICE'] = ParticleType("ICE", sad="ICE_baum")
 
