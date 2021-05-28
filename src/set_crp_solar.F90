@@ -125,9 +125,42 @@ subroutine Set_CRP_Solar(Ctrl, Ind, chan_to_ctrl_index, GZero, SAD_LUT, &
 
    ! Call functions to interpolate the arrays
 
+   !print *, '--- Int_LUT_TauSatSolAziRe ---'
+   !print *, 'shape(SAD_LUT%Rbd)=', shape(SAD_LUT%Rbd)
+   !print *, 'SAD_LUT%Rbd(1,:,1,1,1,1)=', SAD_LUT%Rbd(1,:,1,1,1,1)
+   !print *, 'SAD_LUT%Rbd(2,:,1,1,1,1)=', SAD_LUT%Rbd(2,:,1,1,1,1)
+   !print *, 'SAD_LUT%Rbd(3,:,1,1,1,1)=', SAD_LUT%Rbd(3,:,1,1,1,1)
+   !print *, 'SAD_LUT%Rbd(4,:,1,1,1,1)=', SAD_LUT%Rbd(4,:,1,1,1,1)
+   !print *, 'SAD_LUT%Rbd(5,:,1,1,1,1)=', SAD_LUT%Rbd(5,:,1,1,1,1)
+   !print *, 'SAD_LUT%Rbd(6,:,1,1,1,1)=', SAD_LUT%Rbd(6,:,1,1,1,1)
+   !print *, 'Ind%NSolar=', Ind%NSolar
+
+   !print *, 'SAD_LUT%Grid%Tau%n=', SAD_LUT%Grid%Tau%n
+   !print *, 'SAD_LUT%Grid%Tau%x=', SAD_LUT%Grid%Tau%x
+   !print *, 'SAD_LUT%Grid%Tau%d=', SAD_LUT%Grid%Tau%d
+
+   !print *, 'SAD_LUT%Grid%Re%n=', SAD_LUT%Grid%Re%n
+   !print *, 'SAD_LUT%Grid%Re%x=', SAD_LUT%Grid%Re%x
+   !print *, 'SAD_LUT%Grid%Re%d=', SAD_LUT%Grid%Re%d
+
+   !print *, 'SAD_LUT%Grid%Satzen%n=', SAD_LUT%Grid%Satzen%n
+   !print *, 'SAD_LUT%Grid%Satzen%x=', SAD_LUT%Grid%Satzen%x
+   !print *, 'SAD_LUT%Grid%Satzen%d=', SAD_LUT%Grid%Satzen%d
+
+   !print *, 'SAD_LUT%Grid%Solzen%n=', SAD_LUT%Grid%Solzen%n
+   !print *, 'SAD_LUT%Grid%Solzen%x=', SAD_LUT%Grid%Solzen%x
+   !print *, 'SAD_LUT%Grid%Solzen%d=', SAD_LUT%Grid%Solzen%d
+
+   !print *, 'SAD_LUT%Grid%Relazi%n=', SAD_LUT%Grid%Relazi%n
+   !print *, 'SAD_LUT%Grid%Relazi%x=', SAD_LUT%Grid%Relazi%x
+   !print *, 'SAD_LUT%Grid%Relazi%d=', SAD_LUT%Grid%Relazi%d
+
    call Int_LUT_TauSatSolAziRe(SAD_LUT%Rbd, Ind%NSolar, SAD_LUT%Grid, GZero, &
            Ctrl, CRPOut(:, IRbd), dCRPOut(:,IRbd,:), chan_to_ctrl_index, &
            Ind%YSolar, status)
+   !print *, 'CRPOut(:,IRbd)=', CRPOut(:,IRbd)
+   !print *, 'dCRPOut(:,IRbd,:)=', dCRPOut(:,IRbd,:)
+   !print *, '------------------------------'
 
    if (Ctrl%Approach == AppCld2L) then
       call Int_LUT_TauSolRe(SAD_LUT%Rfbd, Ind%NSolar, SAD_LUT%Grid, GZero, &
@@ -135,21 +168,37 @@ subroutine Set_CRP_Solar(Ctrl, Ind, chan_to_ctrl_index, GZero, SAD_LUT, &
               Ind%YSolar,  status)
    end if
 
+   !print *, '--- Int_LUT_TauRe ---'
    call Int_LUT_TauRe(SAD_LUT%Rfd, Ind%NSolar, SAD_LUT%Grid, GZero, &
            Ctrl, CRPOut(:,IRfd), dCRPOut(:,IRfd,:), chan_to_ctrl_index, &
            Ind%YSolar,  status)
+   !print *, 'CRPOut(:,IRfd)=', CRPOut(:,IRfd)
+   !print *, 'dCRPOut(:,IRfd,:)=', dCRPOut(:,IRfd,:)
+   !print *, '------------------------------'
 
+   !print *, '--- Int_LUT_TauSolRe ---'
    call Int_LUT_TauSolRe(SAD_LUT%Tb, Ind%NSolar, SAD_LUT%Grid, GZero, &
            Ctrl, CRPOut(:,ITb), dCRPOut(:,ITb,:), chan_to_ctrl_index, &
            Ind%YSolar, status)
+   !print *, 'CRPOut(:,ITb)=', CRPOut(:,ITb)
+   !print *, 'dCRPOut(:,ITb,:)=', dCRPOut(:,ITb,:)
+   !print *, '------------------------------'
 
+   !print *, '--- Int_LUT_TauSatReOnSol ---'
    call Int_LUT_TauSatReOnSol(SAD_LUT%Tb, Ind%NSolar, SAD_LUT%Grid, GZero, &
            Ctrl, CRPOut(:,ITb_u), dCRPOut(:,ITb_u,:), chan_to_ctrl_index, &
            Ind%YSolar, status)
+   !print *, 'CRPOut(:,ITb_u)=', CRPOut(:,ITb_u)
+   !print *, 'dCRPOut(:,ITb_u,:)=', dCRPOut(:,ITb_u,:)
+   !print *, '------------------------------'
 
+   !print *, '--- Int_LUT_TauSolRe ---'
    call Int_LUT_TauSolRe(SAD_LUT%Tfbd, Ind%NSolar, &
            SAD_LUT%Grid, GZero, Ctrl, CRPOut(:,ITfbd), dCRPOut(:,ITfbd,:), &
            chan_to_ctrl_index, Ind%YSolar, status)
+   !print *, 'CRPOut(:,ITfbd)=', CRPOut(:,ITfbd)
+   !print *, 'dCRPOut(:,ITfbd,:)=', dCRPOut(:,ITfbd,:)
+   !print *, '------------------------------'
 
     if (Ctrl%Approach == AppCld2L) then
        call Int_LUT_TauSatReOnSol(SAD_LUT%Tfbd, Ind%NSolar, SAD_LUT%Grid, GZero, &
@@ -163,13 +212,20 @@ subroutine Set_CRP_Solar(Ctrl, Ind, chan_to_ctrl_index, GZero, SAD_LUT, &
               Ctrl, CRPOut(:,ITd), dCRPOut(:,ITd,:), chan_to_ctrl_index, &
               Ind%YSolar, status)
    else
+      !print *, '--- Int_LUT_TauSatRe ---'
       call Int_LUT_TauSatRe(SAD_LUT%Tfbd, Ind%NSolar, SAD_LUT%Grid, GZero, &
               Ctrl, CRPOut(:,ITd), dCRPOut(:,ITd,:), chan_to_ctrl_index, &
               Ind%YSolar, status)
+      !print *, 'CRPOut(:,ITd)=', CRPOut(:,ITd)
+      !print *, 'dCRPOut(:,ITd,:)=', dCRPOut(:,ITd,:)
+      !print *, '------------------------------'
    end if
 
+   !print *, '--- Int_LUT_TauRe ---'
    call Int_LUT_TauRe(SAD_LUT%Tfd, Ind%NSolar, SAD_LUT%Grid, GZero, &
            Ctrl, CRPOut(:,ITfd), dCRPOut(:,ITfd,:), chan_to_ctrl_index, &
            Ind%YSolar, status)
-
+   !print *, 'CRPOut(:,ITfd)=', CRPOut(:,ITfd)
+   !print *, 'dCRPOut(:,ITfd,:)=', dCRPOut(:,ITfd,:)
+   !print *, '------------------------------'
 end subroutine Set_CRP_Solar

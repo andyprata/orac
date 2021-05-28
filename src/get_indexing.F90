@@ -160,6 +160,8 @@ subroutine Get_Indexing(Ctrl, SAD_Chan, SPixel, MSI_Data, status)
    ! Select appropriate logic for channel selection
    select case (Ctrl%Approach)
    case (AppCld1L)
+      ! Force night-time retrieval
+      SPixel%Illum(1) = INight
       if (.not. Ctrl%do_new_night_retrieval &
           .or. SPixel%Illum(1) .eq. IDay .or. SPixel%Illum(1) .eq. ITwi) then
          call cloud_indexing_logic(Ctrl, SPixel, is_not_used_or_missing, &
@@ -486,7 +488,11 @@ subroutine cloud_indexing_logic(Ctrl, SPixel, is_not_used_or_missing, &
    ! channels then pick the first one in Ctrl%ReChans that matches and set the
    ! rest of the Ctrl%ReChans that match to missing.  If Ctrl%ReChans is not
    ! associated it is assumed that all available r_e channels should be used.
+   print *, 'Ctrl%ReChans=', Ctrl%ReChans(:)
+   print *, 'Ctrl%r_e_chans=', Ctrl%r_e_chans(:)
+   print *, 'Ctrl%Ind%Y_ID=', Ctrl%Ind%Y_ID(:)
    if (SPixel%Illum(1) .eq. IDay .and. associated(Ctrl%ReChans)) then
+      print *, 'Daytime and ReChans Associated.'
       i_r_e_chan = 0
       do i_chan = 1, size(Ctrl%ReChans)
          ii_chan = find_in_array(Ctrl%r_e_chans, Ctrl%ReChans(i_chan))
@@ -495,6 +501,7 @@ subroutine cloud_indexing_logic(Ctrl, SPixel, is_not_used_or_missing, &
             if (ii_chan .gt. 0) then
                if (.not. is_not_used_or_missing(ii_chan)) then
                   i_r_e_chan = Ctrl%ReChans(i_chan)
+                  print *, 'i_r_e_chan=', i_r_e_chan
                   exit
                end if
             end if
@@ -506,6 +513,8 @@ subroutine cloud_indexing_logic(Ctrl, SPixel, is_not_used_or_missing, &
             if (any(Ctrl%Ind%Y_ID(i_chan) .eq. Ctrl%r_e_chans) .and. &
                     Ctrl%Ind%Y_ID(i_chan) .ne. i_r_e_chan) then
                is_not_used_or_missing(i_chan) = .true.
+               !print *, 'Set to not used Ctrl%Ind%Y_ID(i_chan)=', Ctrl%Ind%Y_ID(i_chan)
+               !print *, 'Retaining Ctrl%Ind%Y_ID(i_chan)=', Ctrl%Ind%Y_ID(i_chan)
             end if
          end do
       end if

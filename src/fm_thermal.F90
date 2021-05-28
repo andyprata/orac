@@ -220,8 +220,11 @@ subroutine FM_Thermal(Ctrl, SAD_LUT, SPixel, SAD_Chan, RTM_Pc, X, GZero, BT, &
    status = 0
    d_R    = 0
 
+   !print *, '------------- FM THERMAL DEBUGGING -------------'
+
    ! Subscripts for thermal channels in RTM arrays
    Thermal = SPixel%spixel_y_thermal_to_ctrl_y_thermal_index(:SPixel%Ind%NThermal)
+   !print *, 'Thermal=', Thermal
 
    ! Set up the LW cloud radiative properties
    ! Layer 1
@@ -237,13 +240,19 @@ subroutine FM_Thermal(Ctrl, SAD_LUT, SPixel, SAD_Chan, RTM_Pc, X, GZero, BT, &
 
    ! Calculate delta_Ts
    delta_Ts = X(ITs) - SPixel%RTM%T(SPixel%RTM%Np)
+   !print *, 'delta_Ts=', delta_Ts  ! Consistent with old LUT but why is it 0?
 
    ! Calculate product dB_dTs * SPixel%RTM%LW%Ems (for efficiency)
-   Es_dB_dTs = SPixel%RTM%LW%dB_dTs(Thermal) * SPixel%RTM%LW%Ems(Thermal)
+   Es_dB_dTs = SPixel%RTM%LW%dB_dTs(Thermal) * SPixel%RTM%LW%Ems(Thermal) ! Inf
+   !print *, 'SPixel%RTM%LW%dB_dTs(Thermal)=', SPixel%RTM%LW%dB_dTs(Thermal)
+   !print *, 'SPixel%RTM%LW%Ems(Thermal)=', SPixel%RTM%LW%Ems(Thermal) ! OK
+   !print *, 'Es_dB_dTs=', Es_dB_dTs  ! = Inf
+
 
    ! Update clear radiances at each RTM pressure level
    R_clear = SPixel%RTM%LW%R_clear(Thermal) + &
       (delta_Ts * Es_dB_dTs * SPixel%RTM%LW%Tsf(Thermal))
+   !print *, 'R_clear=', R_clear  ! OK
 
    ! Update below cloud radiance after interpolation to Pc
    RTM_Pc(1)%LW%Rbc_up(Thermal) = RTM_Pc(1)%LW%Rbc_up(Thermal) + &
@@ -254,10 +263,13 @@ if (Ctrl%Approach .ne. AppCld2L) then
              RTM_Pc(1)%LW%B(Thermal)       * CRP(:,IEm)  + &
              RTM_Pc(1)%LW%Rac_dwn(Thermal) * CRP(:,IR_dv)) * &
              RTM_Pc(1)%LW%Tac(Thermal) + RTM_Pc(1)%LW%Rac_up(Thermal)
+   !print *, 'R_over=', R_over
 
    ! Calculate partly cloudy radiances at TOA (a linear combination of R_clear
    ! and R_over)
    R = X(IFr) * R_over + (1.0 - X(IFr)) * R_clear
+   !print *, 'R=', R
+
 
    ! Calculate product X%frac*Tac (for efficiency)
    fTac = X(IFr) * RTM_Pc(1)%LW%Tac(Thermal)
@@ -287,9 +299,13 @@ if (Ctrl%Approach .ne. AppCld2L) then
    ! Gradient w.r.t. cloud fraction, f
    d_R(:,IFr) = R_over - R_clear
 
+   !print *, 'd_R=', d_R
+
    ! Gradient w.r.t. surface temperature, Ts
    d_R(:,ITs) = fTac * Es_dB_dTs * RTM_Pc(1)%LW%Tbc(Thermal) * CRP(:,IT_dv) + &
       (1.0 - X(IFr)) * Es_dB_dTs * SPixel%RTM%LW%Tsf(Thermal)
+   !print *, '------------------------------------------------'
+
 else
    ! Update below cloud radiance after interpolation to Pc
    RTM_Pc(2)%LW%Rbc_up(Thermal) = RTM_Pc(2)%LW%Rbc_up(Thermal) + &
@@ -420,5 +436,9 @@ end if
    do i = 1, MaxStateVar
       d_BT(:,i) = dT_dR * d_R(:,i)
    end do
+   !print *, '------- FM Thermal --------'
+   !print *, "BT=", BT
+   !print *, "d_BT=", d_BT
+   !print *, '---------------------------'
 
 end subroutine FM_Thermal

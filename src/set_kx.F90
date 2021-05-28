@@ -57,9 +57,16 @@ subroutine Set_Kx(Ctrl, SPixel, dY_dX, Kx, Kj)
    integer :: i
 
    ! Set values in Kx for the active state variables.
+   !print *, '------ Set_Kx -------------------------------'
    do i = 1, SPixel%Nx
       Kx(:,i) = dY_dX(:, SPixel%X(i)) / Ctrl%Invpar%XScale(SPixel%X(i))
+      !print *, 'i=', i
+      !print *, 'dY_dX(:, SPixel%X(i))=', dY_dX(:, SPixel%X(i))  ! NaNs
+      !print *, 'Ctrl%Invpar%XScale(SPixel%X(i))=', &
+                !Ctrl%Invpar%XScale(SPixel%X(i))  ! OK
+      !print *, 'Kx(:,i)=', Kx(:,i)
    end do
+   !print *, '---------------------------------------------'
 
    ! Set Jacobian for requested parameter errors
    if (SPixel%NXJ > 0) then

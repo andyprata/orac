@@ -129,12 +129,16 @@ subroutine Get_LwSwRTM(Ctrl, SAD_Chan, RTM, SPixel, status)
 
       ! Set dB_dTs using the surface temperature. (T2R needs an array of T
       ! values, one per channel, to convert).
-
+      !print *, '------ get_lwswrtm ---------'
       T_Array = SPixel%RTM%T(SPixel%RTM%Np)
+      !print *, 'Ctrl%Ind%YThermal=', Ctrl%Ind%YThermal
       SAD_temp = SAD_Chan(Ctrl%Ind%YThermal)
+      !print *, 'T_Array=', T_Array
+      !print *, 'SAD_temp=', SAD_temp
       if (status == 0) call T2R(Ctrl%Ind%NThermal, SAD_temp, T_Array, R, &
            SPixel%RTM%LW%dB_dTs, status)
    end if
+   !print *, '-------------------------------'
 
    ! Set surface level to TOA transmittances
    SPixel%RTM%LW%Tsf = SPixel%RTM%LW%Tac(:,RTM%Np)

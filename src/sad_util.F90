@@ -115,11 +115,6 @@ subroutine map_ch_indices(nreq, required_ind, npro, provided_ind, map)
    integer, intent(inout) :: map(:)
    integer :: i, j
 
-   print *, 'nreq=', nreq
-   print *, 'required_ind=', required_ind
-   print *, 'npro=', npro
-   print *, 'provided_ind=', provided_ind
-
    map = 0
    do i = 1, nreq
       do j = 1, npro
@@ -135,7 +130,6 @@ subroutine map_ch_indices(nreq, required_ind, npro, provided_ind, map)
          stop error_stop_code
       end if
    end do
-   print *, 'map=', map
 
 end subroutine map_ch_indices
 

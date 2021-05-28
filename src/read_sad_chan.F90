@@ -236,4 +236,11 @@ subroutine Read_SAD_Chan(Ctrl, SAD_Chan)
       stop DriverFileDataErr
    end if
 
+   print *, 'Sad_Chan(:)%Thermal%NEBT', SAD_Chan(:)%Thermal%NEBT
+   print *, 'Sad_Chan(:)%Solar%NedR', SAD_Chan(:)%Solar%NedR
+
+   print *, 'Sad_Chan(:)%Solar%F0', SAD_Chan(:)%Solar%F0
+   print *, 'Sad_Chan(:)%Solar%F1', SAD_Chan(:)%Solar%F1
+
+
 end subroutine Read_SAD_Chan

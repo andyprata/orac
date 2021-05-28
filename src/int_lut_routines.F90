@@ -154,6 +154,13 @@ subroutine Int_LUT_Common(Ctrl, NChans, Grid, GZero, G, FInt, FGrads, &
       Y(3) = G(i,iX1,iX1)
       Y(2) = G(i,iX1,iX0)
 
+!      print *, '-------- Int_lut_common start -------'
+!      print *,'Y(1)=',Y(1)
+!      print *,'Y(2)=',Y(2)
+!      print *,'Y(3)=',Y(3)
+!      print *,'Y(4)=',Y(4)
+!      print *, '-------- Int_lut_common end -------'
+
       ! Now call linint or the adapted Numerical Recipes BCuInt subroutine to
       ! perform the interpolation to our desired state vector
       if (Ctrl%LUTIntSelm .eq. LUTIntMethLinear) then

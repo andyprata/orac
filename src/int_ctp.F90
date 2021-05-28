@@ -170,8 +170,8 @@ subroutine Int_CTP(SPixel, Ctrl, BT, CTP, status)
 
    ! Alter temperatures within the stratosphere by extrapolating the lapse
    ! rate immediately beneath the tropopause upwards
-   gradient = (t(k+1) - t(k+2)) / (p(k+1) - p(k+2))
-   t(1:k) = t(k+1) + gradient * (p(1:k) - p(k+1))
+!   gradient = (t(k+1) - t(k+2)) / (p(k+1) - p(k+2))
+!   t(1:k) = t(k+1) + gradient * (p(1:k) - p(k+1))
 
 
    !----------------- INTERPOLATE BT ONTO TEMPERATURE PROFILE ------------------

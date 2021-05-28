@@ -99,16 +99,43 @@ subroutine Set_CRP_Thermal(Ctrl, Ind, chan_to_ctrl_index, GZero, SAD_LUT, &
 
    ! Td, Rd and Em are interpolated in Tau, SatZen and Re over a range of
    ! channels from First to NY.
+   !print *, "shape(CRPOut)=", shape(CRPOut)
+   !print *, "shape(dCRPOut)=", shape(dCRPOut)
+   !print *, '--- CRP_Thermal IRd Int_LUT_TauSatRe ---'
    call Int_LUT_TauSatRe(SAD_LUT%Rd, Ind%NThermal, SAD_LUT%Grid, GZero, Ctrl, &
            CRPOut(:,IRd), dCRPOut(:,IRd,:), chan_to_ctrl_index, Ind%YThermal, &
            status)
+   !print *, "IRd=", IRd
+   !print *, 'CRPOut(:,IRd)=',CRPOut(:,IRd)
+   !print *, 'dCRPOut(:,IRd,:)=', dCRPOut(:,IRd,:)
+   !print *, '------------------------------------'
 
+   !print *, '--- CRP_Thermal ITd Int_LUT_TauSatRe ---'
    call Int_LUT_TauSatRe(SAD_LUT%Td, Ind%NThermal, SAD_LUT%Grid, GZero, Ctrl, &
            CRPOut(:,ITd), dCRPOut(:,ITd,:), chan_to_ctrl_index, Ind%YThermal, &
            status)
+   !print *, "ITd=", ITd
+   !print *, 'CRPOut(:,ITd)=',CRPOut(:,ITd)
+   !print *, 'dCRPOut(:,ITd,:)=', dCRPOut(:,ITd,:)
+   !print *, '------------------------------------'
 
+   !print *, '--- CRP_Thermal IEm Int_LUT_TauSatRe ---'
    call Int_LUT_TauSatRe(SAD_LUT%Em, Ind%NThermal, SAD_LUT%Grid, GZero, Ctrl, &
            CRPOut(:,IEm), dCRPOut(:,IEm,:), chan_to_ctrl_index, Ind%YThermal, &
            status)
+   !print *, "IEm=", IEm
+   !print *, 'CRPOut(:,IEm)=',CRPOut(:,IEm)
+   !print *, 'dCRPOut(:,IEm,:)=', dCRPOut(:,IEm,:)
+   !print *, '------------------------------------'
+
+   !print *, '----------- CRPOut(:,:) ------------'
+   !print *, CRPOut(:,:)
+   !print *, '------------------------------------'
+
+   !print *, '----------- dCRPOut(:,:,:) ---------'
+   !print *, dCRPOut(:,:,:)
+   !print *, '------------------------------------'
+
+
 
 end subroutine Set_CRP_Thermal

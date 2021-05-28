@@ -195,8 +195,16 @@ subroutine FM(Ctrl, SPixel, SAD_Chan, SAD_LUT, RTM_Pc, X, Y, dY_dX, status)
 
    ! Call Set_GZero (results used in both FM_Thermal and FM_Solar).
    call Allocate_GZero(GZero(1), SPixel%Ind%Ny)
+   !print *, '---- Set_GZero ----'
+   !print *, 'X=', X
+   !print *, '-------------------'
+   !print *, 'ITau=',ITau !  = 1 ! Index of tau, cloud optical depth in state vector
+   !print *, 'X(ITau)=',X(ITau) ! NaN
+   !print *, '-------------------'
+   !print *, 'IRe=',IRe ! = 2 ! Index of re, effective radius in state vector
+   !print *, 'X(IRe)=',X(IRe) ! NaN
+   !print *, '-------------------'
    call Set_GZero(X(ITau), X(IRe), Ctrl, SPixel, SAD_LUT(1), GZero(1), status)
-
    ! If the two layer retrieval is active call Set_GZero for the second layer.
    if (Ctrl%Approach == AppCld2L) then
       call Allocate_GZero(GZero(2), SPixel%Ind%Ny)

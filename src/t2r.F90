@@ -66,6 +66,12 @@ subroutine T2R(NChan, SAD_Chan, T, R, d_R_d_T, status)
    log_huge_value=log(huge_value)
 
    ! Begin calculating radiances
+   !print *, '----------- T2R ------------'
+   !print *, 'T1=', SAD_Chan%Thermal%T1
+   !print *, 'T2=', SAD_Chan%Thermal%T2
+   !print *, 'B1=', SAD_Chan%Thermal%B1
+   !print *, 'B2=', SAD_Chan%Thermal%B2
+   !print *, '----------- T2R ------------'
 
    T_eff = ( T * SAD_Chan%Thermal%T2 ) + SAD_Chan%Thermal%T1
 

@@ -140,6 +140,17 @@ subroutine Int_LUT_TauSatSolAziRe(F, NChans, Grid, GZero, Ctrl, FInt, FGrads, &
       R_index( 1) = GZero%iR1 (ii2)
       R_index( 2) = GZero%iRp1(ii2)
 
+!      print *, '---------- G ZERO --------'
+!      print *, 'GZero%iTm1(ii2)', GZero%iTm1(ii2)
+!      print *, 'GZero%iT0 (ii2)', GZero%iT0 (ii2)
+!      print *, 'GZero%iT1 (ii2)', GZero%iT1 (ii2)
+!      print *, 'GZero%iTp1(ii2)', GZero%iTp1(ii2)
+!      print *, 'GZero%iRm1(ii2)', GZero%iRm1(ii2)
+!      print *, 'GZero%iR0 (ii2)', GZero%iR0 (ii2)
+!      print *, 'GZero%iR1 (ii2)', GZero%iR1 (ii2)
+!      print *, 'GZero%iRp1(ii2)', GZero%iRp1(ii2)
+!      print *, '--------------------------'
+
       do j = iXm1, iXp1
          jj = T_index(j)
          do k = iXm1, iXp1
@@ -172,6 +183,15 @@ subroutine Int_LUT_TauSatSolAziRe(F, NChans, Grid, GZero, Ctrl, FInt, FGrads, &
          end do
       end do
    end do
+
+!   print *, '-------- G MATRIX --------'
+!   print *, 'Chan1=', G(1, :, :)
+!   print *, 'Chan2=', G(2, :, :)
+!   print *, 'Chan3=', G(3, :, :)
+!   print *, 'Chan4=', G(4, :, :)
+!   print *, 'Chan9=', G(5, :, :)
+!   print *, 'Chan10=', G(6, :, :)
+!   print *, '--------------------------'
 
    call Int_LUT_Common(Ctrl, NChans, Grid, GZero, G, FInt, FGrads, &
                        chan_to_ctrl_index, chan_to_spixel_index, status)

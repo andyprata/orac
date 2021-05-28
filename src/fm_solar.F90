@@ -885,6 +885,9 @@ else
    b = CRP(:,IT_00) * Rs2(:,IRho_0D) * Tbc_0 + CRP(:,IT_0d) * &
           Rs2(:,IRho_DD) * Tbc_d
 
+   !print *, 'a=', a
+   !print *, 'b=', b
+
    ! Calculate overcast bidirectional reflectance
    !
    ! This reflectance should be sun normalized [scaled by cos(theta_0)].  The
@@ -906,6 +909,8 @@ else
    ! Equations 3 and 4 obey the principal of reciprocity and produce slightly
    ! better results.
 
+   !print *, 'Ctrl%i_equation_form=', Ctrl%i_equation_form
+
    if (Ctrl%i_equation_form == 1) then
       c = CRP(:,IT_dv) * Tbc_d
 
@@ -923,6 +928,11 @@ else
    else if (Ctrl%i_equation_form == 3) then
       c = CRP(:,IT_dv) * Tbc_d + CRP(:,IR_dd) * Rs2(:,IRho_DV) * &
              CRP(:,IT_vv) * Tbc_dd * Tbc_v
+             !print *, 'Tbc_d=', Tbc_d ! OK
+             !print *, 'Tbc_dd=', Tbc_dd ! OK
+             !print *, 'Tbc_v=', Tbc_v ! OK
+      !print *, 'c=', c ! NaN
+
       e = CRP(:,IR_0v) + &
          (CRP(:,IT_00) * Rs2(:,IRho_0V) * CRP(:,IT_vv) * Tbc_0v + &
           CRP(:,IT_0d) * Rs2(:,IRho_DV) * CRP(:,IT_vv) * Tbc_dv + &
@@ -938,10 +948,15 @@ else
    end if
 
    Ref_over = Tac_0v * e
+   !print *, 'Tac_0v=', Tac_0v ! OK
+   !print *, 'e=', e ! OK
 
    ! Calculate top of atmosphere bidirectional reflectance for fractional cloud
    ! cover
    if (i_layer == 0) then
+     !print *, 'X(IFrX)=', X(IFrX) ! = 1.0
+     !print *, 'Ref_over=', Ref_over ! NaN
+     !print *, 'SPixel%RTM%Ref_clear=', SPixel%RTM%Ref_clear ! OK
       Ref = X(IFrX) * Ref_over + (1.0-X(IFrX)) * SPixel%RTM%Ref_clear
    else
       Ref = X(IFrX) * Ref_over + (1.0-X(IFrX)) * Rs2(:,IRho_0V) * Tsf_0v
@@ -1367,5 +1382,11 @@ end if
               SPixel%Geom%SEC_o(SPixel%ViewIdx(SPixel%Ind%YSolar(i)))
       end do
    end if
+
+   !print *, '-------- FM Solar ---------'
+   !print *, "Ref=", Ref
+   !print *, "d_Ref=", d_Ref
+   !print *, '---------------------------'
+
 
 end subroutine FM_Solar

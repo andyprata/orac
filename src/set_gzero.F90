@@ -92,8 +92,20 @@ subroutine Set_GZero(Tau, Re, Ctrl, SPixel, SAD_LUT, GZero, status)
    ! Set the "zero'th" array indices for the interpolations, i.e. find the array
    ! indices of the nearest neighbour grid points in each dimension. Use the
    ! 'locate' function
+!   print *, '------ Tau -------------------------------'
+!   print *, 'Tau=', Tau
+!   print *, 'SAD_LUT%Grid%Tau%x=', SAD_LUT%Grid%Tau%x
    GZero%iT0 = locate(SAD_LUT%Grid%Tau, Tau, .true.)
+!   print *, 'GZero%iT0=', GZero%iT0
+!   print *, '-------------------------------------------'
+
+!   print *, '------ Re ---------------------------------'
+!   print *, 'Re=', Re
+!   print *, 'SAD_LUT%Grid%Re%x=', SAD_LUT%Grid%Re%x
    GZero%iR0 = locate(SAD_LUT%Grid%Re, Re, .true.)
+!   print *, 'GZero%iR0=', GZero%iR0
+!   print *, '-------------------------------------------'
+
    do i = 1, SPixel%Ind%Ny
       GZero%iSaZ0(i) = locate(SAD_LUT%Grid%SatZen, &
            SPixel%Geom%Satzen(SPixel%ViewIdx(i)), .true.)
@@ -103,6 +115,11 @@ subroutine Set_GZero(Tau, Re, Ctrl, SPixel, SAD_LUT, GZero, status)
            SPixel%Geom%Satzen(SPixel%ViewIdx(i)), .true.)
       GZero%iRA0(i) = locate(SAD_LUT%Grid%Relazi, &
            SPixel%Geom%Relazi(SPixel%ViewIdx(i)), .true.)
+!      print *, 'i=', i
+!      print *, 'GZero%iSaZ0(i)=', GZero%iSaZ0(i)
+!      print *, 'GZero%iSoZ0(i)=', GZero%iSoZ0(i)
+!      print *, 'GZero%ISaZSoZ0(i)=', GZero%ISaZSoZ0(i)
+!      print *, 'GZero%iRA0(i)=', GZero%iRA0(i)
    end do
 
    ! This sets the upper bracketing index, the locate above set the lower index
@@ -142,6 +159,9 @@ subroutine Set_GZero(Tau, Re, Ctrl, SPixel, SAD_LUT, GZero, status)
    ! with indices (0, 0, ...) to (Tau, Re, ...) expressed as a fraction of the
    ! LUT grid steps.
 
+!   print *, 'SAD_LUT%Grid%SatZen%x=', SAD_LUT%Grid%SatZen%x
+!   print *, 'SAD_LUT%Grid%SolZen%x=', SAD_LUT%Grid%SolZen%x
+!   print *, 'SAD_LUT%Grid%RelAzi%x=', SAD_LUT%Grid%RelAzi%x
    ! These variables are not used and could be removed? No, they are used!
    do i = 1, SPixel%Ind%Ny
       GZero%dT(i) = (Tau - SAD_LUT%Grid%Tau%x(GZero%iT0(i))) / &
@@ -160,6 +180,12 @@ subroutine Set_GZero(Tau, Re, Ctrl, SPixel, SAD_LUT, GZero, status)
       GZero%dRA(i) = &
          (SPixel%Geom%RelAzi(SPixel%ViewIdx(i)) - SAD_LUT%Grid%RelAzi%x(GZero%iRA0(i))) / &
          (SAD_LUT%Grid%RelAzi%x(GZero%iRA1(i)) - SAD_LUT%Grid%RelAzi%x(GZero%iRA0(i)))
+!      print *, 'GZero%dT(i)=', GZero%dT(i)
+!      print *, 'GZero%dR(i)=', GZero%dR(i)
+!      print *, 'GZero%dSaZ(i)=', GZero%dSaZ(i)
+!      print *, 'GZero%dSoZ(i)=', GZero%dSoZ(i)
+!      print *, 'GZero%dSaZSoZ(i)=', GZero%dSaZSoZ(i)
+!      print *, 'GZero%dRA(i)=', GZero%dRA(i)
    end do
 
    ! Calculate 1.0 minus each of the d values above - used several times by the
@@ -172,5 +198,7 @@ subroutine Set_GZero(Tau, Re, Ctrl, SPixel, SAD_LUT, GZero, status)
       GZero%Ra1(i)   = 1.0 - GZero%dRA(i)
       GZero%SaSo1(i) = 1.0 - GZero%dSaZSoZ(i)
    end do
+
+   ! print *, '------------------------------------------------'
 
 end subroutine Set_GZero

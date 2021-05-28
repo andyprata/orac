@@ -314,32 +314,51 @@ subroutine Invert_Marquardt(Ctrl, SPixel, SAD_Chan, SAD_LUT, RTM_Pc, Diag, stat)
    ! Set parameter covariance matrix
    if (SPixel%NXJ > 0) Sj = SPixel%Sx(SPixel%XJ, SPixel%XJ)
 
+   ! print *, 'SxInv=', SxInv ! NaNs
 
    ! ************ START EVALUATING FORWARD MODEL ************
-
    ! Evaluate forward model for the first guess and initialise the various
    ! arrays. X should be unscaled when passed into FM.
+   ! print *, 'A priori values:'
    call FM(Ctrl, SPixel, SAD_Chan, SAD_LUT, RTM_Pc, SPixel%X0, Y, dY_dX, stat)
    if (stat /= 0) then
       stat = InvMarquardtFMX0Err
       go to 99 ! Terminate processing this pixel
    end if
+   ! print *, 'SPixel%X0=', SPixel%X0 ! SPixel%X0=0.8 12.0 1020.24280 1.0
+   ! print *, 'Y=', Y ! OK
+   ! print *, 'shape(dY_dX)=', shape(dY_dX) ! OK
 
    ! Store measurement first guess
    Diag%Y0(1:SPixel%Ind%Ny) = Y
 
    ! Convert dY_dX to Kx and Kj.
    call Set_Kx(Ctrl, SPixel, dY_dX, Kx, Kj)
+   !print *, 'Kx=', Kx ! NaNs
 
    ! Set covariance matrix Sy. Always call Set_Kx before Set_Sy. Needs Kj.
+!   print *, '------------------ Set_Sy -----------------'
+!   print *, 'SPixel%Sy=', SPixel%Sy
+!   print *, 'Kj=', Kj
+!   print *, 'Sj=', Sj
    call Set_Sy(Ctrl, SPixel, Kj, Sj, Sy)
+!   print *, 'Sy=', Sy ! NaNs
+!   print *, 'SyInv=', SyInv ! NaNs
+!   print *, '-------------------------------------------'
 
    ! Calculate SyInv and SxInv
+!   print *, '------------- Invert_Cholesky -------------'
+!   print *, 'shape(Sy)=', shape(Sy)
    call Invert_Cholesky(Sy, SyInv, SPixel%Ind%Ny, stat)
+!   print *, 'SPixel%Ind%Ny=', SPixel%Ind%Ny
+!   print *, 'stat=', stat
+!   print *, '-------------------------------------------'
    if (stat /= 0) then
       stat = InvMarquardtSyX0Err
+      !print *, 'InvMarquardtSyX0Err=', InvMarquardtSyX0Err
       go to 99 ! Terminate processing this pixel
    end if
+!   print *, 'SyInv=', SyInv ! NaNs
 
    ! Xdiff, the difference between the current state vector X and
    ! the a priori state vector SPixel%Xb for the active state variables.
@@ -356,7 +375,12 @@ subroutine Invert_Marquardt(Ctrl, SPixel, SAD_Chan, SAD_LUT, RTM_Pc, Diag, stat)
    Ja = dot_product(Xdiff, matmul(SxInv, Xdiff))
    Jm = dot_product(Ydiff, matmul(SyInv, Ydiff))
    J0 = Jm + Ja
-
+   !print *, 'Jm=', Jm ! NaN
+   !print *, 'Ja=', Ja ! 1E-12
+   !print *, 'J=', J ! = 0.0
+   !print *, 'J0=', J0 ! NaN
+   !print *, 'Ydiff=', Ydiff ! NaNs
+   !print *, 'Xdiff=', Xdiff ! NaNs
    ! ************* END EVALUATING FORWARD MODEL *************
 
 
@@ -364,6 +388,7 @@ subroutine Invert_Marquardt(Ctrl, SPixel, SAD_Chan, SAD_LUT, RTM_Pc, Diag, stat)
 
    ! Set Xn = X0 for 1st iteration
    SPixel%Xn = SPixel%X0
+   ! print *, 'SPixel%Xn (first iteration)=', SPixel%Xn
 
    ! Adjust cost convergence criteria for the number of active channels in the
    ! super-pixel, since final costs will be divided by Ny for output.
@@ -379,9 +404,15 @@ subroutine Invert_Marquardt(Ctrl, SPixel, SAD_Chan, SAD_LUT, RTM_Pc, Diag, stat)
    dJ_dX   = matmul(KxT_SyI, Ydiff) + matmul(SXInv, Xdiff)
    d2J_dX2 = matmul(KxT_SyI, Kx) + SxInv
 
+   !print *, 'KxT_SyI=', KxT_SyI ! NaNs
+   !print *, 'dJ_dX=', dJ_dX ! NaNs
+   !print *, 'd2J_dX2=', d2J_dX2 ! NaNs
+
+
    ! Set Marquardt parameter (initial weighting favours steepest descent) with
    ! average of leading diagonal of Hessian d2J_dX2.
    alpha = average_hessian(SPixel%Nx, d2J_dX2, Ctrl%Invpar%MqStart)
+   !print *, 'alpha (after average_hessian)=', alpha
 
    do
       ! Use alpha and d2J_dX2 to set delta_X. Solve_Cholesky is used to find
@@ -390,7 +421,15 @@ subroutine Invert_Marquardt(Ctrl, SPixel, SAD_Chan, SAD_LUT, RTM_Pc, Diag, stat)
       ! Multiplying through by J2_plusA we get:
       !    J2_plusA * delta_X = -dJ_dX,
       ! which we can solve for delta_X using Solve_Cholesky.
+      !!print *, 'SPixel%Nx=', SPixel%Nx ! OK
+      !!print *, 'd2J_dX2=', d2J_dX2 ! NaNs
+      !!print *, 'alpha (before add unit)=', alpha ! NaNs
+      !!print *, 'J2plus_A (before add_unit)=', J2plus_A ! NaNs
       call add_unit(SPixel%Nx, d2J_dX2, alpha, J2plus_A)
+      !!print *, 'alpha (after add unit)=', alpha ! NaNs
+      !!print *, 'J2plus_A (after add_unit)=', J2plus_A ! NaNs
+      !!print *, 'dJ_dX=', dJ_dX ! NaNs
+      !!print *, 'delta_X (before Solve_Cholesky)=', delta_X ! NaNs
       call Solve_Cholesky(J2plus_A, dJ_dX, delta_X, SPixel%Nx, stat)
       if (stat /= 0) then
 #ifdef DEBUG
@@ -400,10 +439,16 @@ subroutine Invert_Marquardt(Ctrl, SPixel, SAD_Chan, SAD_LUT, RTM_Pc, Diag, stat)
          go to 99 ! Terminate processing this pixel
       end if
       ! De-scale delta_X so that the X passed to FM can be kept un-scaled
+      !!print *, 'delta_X (before scaling)=', delta_X
+      !!print *, 'Ctrl%Invpar%XScale(SPixel%X)=', Ctrl%Invpar%XScale(SPixel%X)
+
       delta_X = delta_X / Ctrl%Invpar%XScale(SPixel%X)
 
       ! Apply step delta_x to the active state variables. Assumes Xn and
       ! delta_X are both unscaled.
+      !!print *, 'SPixel%Xn(SPixel%X)=', SPixel%Xn(SPixel%X)
+      !!print *, 'delta_X (after scaling)=', delta_X
+
       Xplus_dX(SPixel%X)  = SPixel%Xn(SPixel%X) + delta_X
       if (SPixel%NXJ > 0) Xplus_dX(SPixel%XJ) = SPixel%Xn(SPixel%XJ)
       if (SPixel%NXI > 0) Xplus_dX(SPixel%XI) = SPixel%Xn(SPixel%XI)
@@ -419,6 +464,12 @@ subroutine Invert_Marquardt(Ctrl, SPixel, SAD_Chan, SAD_LUT, RTM_Pc, Diag, stat)
          stat = InvMarquardtFMErr
          go to 99 ! Terminate processing this pixel
       end if
+
+      !!print *, 'SPixel%Xb(SPixel%X)=', SPixel%Xb(SPixel%X) ! OK
+      !!print *, 'Xplus_dX(SPixel%X)=', Xplus_dX(SPixel%X)  ! NaN
+      !!print *, 'Ctrl%Invpar%XScale(SPixel%X)=', Ctrl%Invpar%XScale(SPixel%X) ! OK
+      !!print *, 'SPixel%Ym=', SPixel%Ym ! OK
+      !!print *, 'Y=', Y ! NaN
 
       ! Set new Kx, Kj, Sy and SyInv
       call Set_Kx(Ctrl, SPixel, dY_dX, Kx, Kj)
@@ -438,10 +489,18 @@ subroutine Invert_Marquardt(Ctrl, SPixel, SAD_Chan, SAD_LUT, RTM_Pc, Diag, stat)
       Ydiff = SPixel%Ym - Y
       Diag%YmFit(1:SPixel%Ind%NY) = -Ydiff
 
+      !!print *, 'Xdiff=', Xdiff
+      !!print *, 'Ydiff=', Ydiff
+
       Ja = dot_product(Xdiff, matmul(SxInv, Xdiff))
       Jm = dot_product(Ydiff, matmul(SyInv, Ydiff))
       J  = Jm + Ja
       delta_J = J-J0
+      !!print *, 'Jm=', Jm
+      !!print *, 'Ja=', Ja
+      !!print *, 'J=', J
+      !!print *, 'J0=', J0
+      !!print *, 'delta_J=', delta_J
       ! ************* END EVALUATE FORWARD MODEL *************
 
       ! Update Levenberg-Marquadt constant (alpha) based on cost
@@ -578,6 +637,8 @@ subroutine Invert_Marquardt(Ctrl, SPixel, SAD_Chan, SAD_LUT, RTM_Pc, Diag, stat)
    ! ************* END ERROR ANALYSIS *************
 
    call Allocate_GZero(GZero, SPixel%Ind%Ny)
+!   print *, 'SPixel%Xn(ITau)=', SPixel%Xn(ITau)
+!   print *, 'SPixel%Xn(IRe)=', SPixel%Xn(IRe)
    call Set_GZero(SPixel%Xn(ITau), SPixel%Xn(IRe), Ctrl, SPixel, SAD_LUT(1), &
         GZero, stat)
    if (stat /= 0) go to 99 ! Terminate processing this pixel

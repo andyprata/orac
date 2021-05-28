@@ -559,6 +559,8 @@ class ParticleType:
                 fdr_name = join(fdr, inst.sensor.lower() + "/" +
                                 inst.platform.upper() + "/" + self.sad)
 
+            print(fdr_name)
+
             print(self.name)
             if len(self.name) == 3:
                 file_name = "_".join((inst.inst, self.name, "RBD", "Ch*.sad"))
@@ -581,10 +583,24 @@ class ParticleType:
 
 # Using non-imager LUTs and Baum properties at Greg's recommendation
 SETTINGS = {}
+# Note still have to use old LUTs when doing multi-layer retrieval
 SETTINGS['WAT'] = ParticleType("WAT", sad="WAT")
-#SETTINGS['WAT'] = ParticleType("liquid-water", sad="WAT")
 
+# Testing new tables
+#SETTINGS['WAT'] = ParticleType("m_liquid-water_a01_pold_v04", sad="WAT")
 SETTINGS['ICE'] = ParticleType("ICE", sad="ICE_baum")
+
+SETTINGS['EYJ'] = ParticleType("m_volcanic-ash_a01_pey1_v04", inv=(
+    Invpar('ITau', ap=-0.3, sx=1e8), Invpar('IRe', ap=5, sx=1e8)))
+
+# SETTINGS['EYJ'] = ParticleType("m_volcanic-ash_a01_pv81_v04", inv=(
+#     Invpar('ITau', ap=-0.3, sx=1e4), Invpar('IRe', ap=5, sx=1e4)))
+
+# SETTINGS['EYJ'] = ParticleType("EYJ", inv=(
+#     #Invpar('ITau', ap=0.18, sx=1.5), Invpar('IRe', ap=0.7, sx=0.15)
+#     Invpar('ITau', ap=-0.3, sx=1e8), Invpar('IRe', ap=5, sx=1e8)
+# ), sad="EYJ")
+
 
 tau = Invpar('ITau', ap=-1.0, sx=1.5)
 SETTINGS['A70'] = ParticleType("A70", inv=(tau, Invpar('IRe', ap=0.0856, sx=0.15)))
@@ -597,6 +613,4 @@ SETTINGS['A76'] = ParticleType("A76", inv=(tau, Invpar('IRe', ap=0.0856, sx=0.15
 SETTINGS['A77'] = ParticleType("A77", inv=(tau, Invpar('IRe', ap=-0.0419, sx=0.15)))
 SETTINGS['A78'] = ParticleType("A78", inv=(tau, Invpar('IRe', ap=-0.257, sx=0.15)))
 SETTINGS['A79'] = ParticleType("A79", inv=(tau, Invpar('IRe', ap=-0.848, sx=0.15)))
-SETTINGS['EYJ'] = ParticleType("EYJ", inv=(
-    Invpar('ITau', ap=0.18, sx=1.5), Invpar('IRe', ap=0.7, sx=0.15)
-))
+

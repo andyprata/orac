@@ -6,11 +6,7 @@ stack_size = 250000
 
 # Location of source code trunk from ORAC repository
 # orac_dir  = '/network/aopp/matin/eodg/shared/orac/orac'
-orac_dir = '/home/prataa/orac_fork/orac'
-
-# Location of data directory from ORAC repository
-# data_dir  = '/network/aopp/matin/eodg/shared/orac/data'
-data_dir = '/home/prataa/data'
+orac_dir = '/home/aprata/PycharmProjects/orac_local/orac'
 
 # Path to library file used to compile ORAC
 try:
@@ -19,10 +15,8 @@ except KeyError:
     orac_lib = orac_dir + '/config/lib.inc'
 
 # Directory of look-up tables
-sad_dirs = ['/network/aopp/apres/ORAC_LUTS',]  # for standard channel configs
-            #'/home/prataa/data/ORAC_LUTS',] # for development of ash AHI measurement covariances
-            #'/home/prataa/data/ORAC_LUTS_nc',] # testing new netcdf LUTs
-            #'/network/aopp/matin/eodg/shared/SAD_Files/HIM',] # for standard ash LUTs
+sad_dirs = ['/home/aprata/orac_data/ORAC_LUTS',
+            '/home/aprata/orac_data/ORAC_LUTS_nc']
 
 # Use ECMWF data from the BADC/CEMS archive
 ecmwf_flag  = 5
@@ -31,53 +25,57 @@ ecmwf_flag  = 5
 # the syntax of datatime.strftime() to denote the folder structure.
 auxiliaries = {
     # Directory containing RTTOV emissivity atlas
-    'atlas_dir'   : '/network/aopp/matin/eodg/shared/rtcoef_rttov12/emis_data',
+    'atlas_dir'   : '/home/aprata/orac_data/rttov121/emis_data',
     # Directory of RTTOV instrument coefficient files
-    'coef_dir'    : '/network/aopp/matin/eodg/shared/rtcoef_rttov12',
-    # Directory of MODIS emisivity retrievals
-    'emis_dir'    : '/network/group/aopp/eodg/modis/MYD11',
-    'camel_dir'   : '/network/group/aopp/eodg/modis/CAMEL',
-    # Directories of MODIS surface BRDF retrievals
-    'mcd43c1_dir' : '/network/aopp/matin/eodg/modis/MCD43/C1',
-    'mcd43c3_dir' : '/network/aopp/matin/eodg/modis/MCD43/C3',
+    'coef_dir'    : '/home/aprata/orac_data/rttov121/rtcoef_rttov12',
+    # Directory of MODIS emisivity retrievals (ftp://ftp.ssec.wisc.edu/pub/g_emis/)
+    # (NOTE: Won't be read in if using CAMEL emissivity)
+    'emis_dir'    : '/home/aprata/orac_data/modis/MYD11',
+    # Download from here: https://e4ftl01.cr.usgs.gov/MEASURES/CAM5K30EM.002/
+    # (NOTE: Using 2016 CAMEL emis. Should be updated at some point...)
+    'camel_dir'   : '/home/aprata/orac_data/modis/CAMEL',
+    # Directories of MODIS surface BRDF retrievals (https://e4ftl01.cr.usgs.gov/MOTA/MCD43C1.006)
+    'mcd43c1_dir' : '/home/aprata/orac_data/modis/MCD43/C1',
+    # Directories of MODIS surface BRDF retrievals (https://e4ftl01.cr.usgs.gov/MOTA/MCD43C3.006)
+    'mcd43c3_dir' : '/home/aprata/orac_data/modis/MCD43/C3',
     # To use ECMWF data from the BADC/CEMS archive (ecmwf_flag == 2), specifiy
     # where each of the three types of file are stored
-    'ggam_dir'    : '/network/aopp/matin/eodg/ecmwf/era_interim/%Y/%m/%d',
-    'ggas_dir'    : '/network/aopp/matin/eodg/ecmwf/era_interim/%Y/%m/%d',
-    'spam_dir'    : '/network/aopp/matin/eodg/ecmwf/era_interim/%Y/%m/%d',
+    'ggam_dir'    : '',#'/network/aopp/matin/eodg/ecmwf/era_interim/%Y/%m/%d',
+    'ggas_dir'    : '',#'/network/aopp/matin/eodg/ecmwf/era_interim/%Y/%m/%d',
+    'spam_dir'    : '',#'/network/aopp/matin/eodg/ecmwf/era_interim/%Y/%m/%d',
     # To use a single ECMWF file (ecmwf_flag == 0), specify their location
     #'ecmwf_dir'   : '/local/home/povey/eodg/povey/data/ecmwf',
-    # To use ERA5 (ecmwf_flag == 0), specify their location
-    'ecmwf_dir'   : '/network/aopp/matin/eodg/ecmwf/ERA5/%Y',
+    # To use ERA5 (ecmwf_flag == 0), location on MATIN is /network/aopp/matin/eodg/ecmwf/ERA5/%Y
+    'ecmwf_dir'   : '/home/aprata/orac_data/ecmwf/ERA5/%Y',
     # Directory of high-resolution ECMWF files
-    'hr_dir'      : '/network/aopp/matin/eodg/ecmwf/era_hr',
+    'hr_dir'      : '',#'/network/aopp/matin/eodg/ecmwf/era_hr',
     # Directory to store the EMOS interpolation file (CF_T0255_R0036000, which
     # will be generated if not already present)
-    'emos_dir'    : '/network/aopp/matin/eodg/shared/emos_files',
-    # Directory of NSIDC ice/snow extent maps
-    'nise_dir'    : '/network/aopp/matin/eodg/users/mcgarragh/data/n5eil01u.ecs.'
-                    'nsidc.org/SAN/OTHR',
-    # Directory of Ocean Colour CCI retrievals
-    'occci_dir'   : '/network/aopp/matin/eodg/shared/orac/data/occci/v4.2',
+    'emos_dir'    : '/home/aprata/orac_data/emos_files',
+    # Directory of NSIDC ice/snow extent maps (https://n5eil01u.ecs.nsidc.org/)
+    # Use download.sh script
+    'nise_dir'    : '/home/aprata/orac_data/NSIDC',
+    # Directory of Ocean Colour CCI retrievals (ftp://ftp.rsg.pml.ac.uk/)
+    #'occci_dir'   : '/home/aprata/orac_data/occci/v5.0',  # v5.0 doesn't have atot_555 variable (required during daytime)
+    # Use download.sh script
+    'occci_dir'   : '/home/aprata/orac_data/occci/v4.2',
     # File containing AATSR calibration coefficients
-    'calib_file'  : '/network/aopp/matin/eodg/shared/AATSR_VIS_DRIFT_V03-00.DAT',
+    'calib_file'  : '/home/aprata/orac_data/AATSR_VIS_DRIFT_V03-00.DAT',
     # File containing the USGS land-use map
-    'usgs_file'   : '/network/aopp/matin/eodg/shared/Aux_file_CM_SAF_AVHRR_'
+    'usgs_file'   : '/home/aprata/orac_data/Aux_file_CM_SAF_AVHRR_'
                     'GAC_ori_0.05deg.nc',
     # Pre-defined geometry only valid for geostationary imager
-    'prelsm_file' : '/network/aopp/matin/eodg/shared/orac/data/predef_lsm/'
-                    'MSG_000E_LSM.nc',  # SEVIRI 0 degrees
+    'prelsm_file' : '/home/aprata/orac_data/predef_geo/'
+                    #'MSG_000E_LSM.nc',  # SEVIRI 0 degrees
                     #'MSG_415E_LSM.nc',  # SEVIRI 41.5 degrees
-                    #'AHI_141E_LSM.nc',  # AHI
-    'pregeo_file' : #'/home/prataa/data/cloud_cci/modis/level1/MYD03.A2019182.1255.006.2019183152802.hdf',
-                    #'/network/aopp/matin/eodg/shared/orac/data/predef_lsm/'
-                    '/home/prataa/data/predef_geo/'
+                    'AHI_141E_LSM.nc',  # AHI
+    'pregeo_file' : '/home/aprata/orac_data/predef_geo/'
                     #'MSG_000E_ANGLES.v01.nc',  # SEVIRI 0 degrees
-                    'MSG_000E_ANGLES.v02.nc',  # SEVIRI 0 degrees
+                    #'MSG_000E_ANGLES.v02.nc',  # SEVIRI 0 degrees
                     #'MSG_415E_ANGLES.v02.nc',  # SEVIRI 41.5 degrees
-                    #'AHI_141E_ANGLES.nc',  # AHI
+                    'AHI_141E_ANGLES.nc',  # AHI
     # Climatology of Swansea s and p parameters
-    'swansea_dir' : '/network/aopp/matin/eodg/atsr/swansea_cb'
+    'swansea_dir' : '/home/aprata/orac_data/swansea_cb'
 }
 
 
@@ -88,12 +86,14 @@ global_attributes = {
     "comments"     : "n/a",
     "email"        : 'andrew.prata@physics.ox.ac.uk',
     "history"      : "n/a",
-    "institute"    : "UoOx",
+    "institute"    : "University of Oxford",
     "keywords"     : "aerosol; cloud; optimal estimation",
     "license"      : "https://github.com/ORAC-CC/orac/blob/master/COPYING",
     "processor"    : "ORAC",
-    "product_name" : "L2-CLOUD-CLD",
-    "project"      : "ESACCI",
+    #"product_name" : "L2-CLOUD-CLD",
+    "product_name" : "L2-CLOUD-ASH",
+    #"project"      : "ESACCI",
+    "project"      : "R4ASH",
     "references"   : "doi:10.5194/amt-5-1889-2012",
     "summary"      : "n/a",
     "url"          : "http://github.com/ORAC-CC/orac",
