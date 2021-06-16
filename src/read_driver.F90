@@ -973,7 +973,7 @@ subroutine Read_Driver(Ctrl, global_atts, source_atts)
    Ctrl%X0(ISP)            = switch_app(a, Default=0.3)
    Ctrl%X0(ISG)            = switch_app(a, Default=0.3)
 
-   ! A priori uncertainty
+   ! A priori uncertainty (standard deviation)
    if (Ctrl%Approach /= AppCld2L) then
       Ctrl%Sx(ITau)        = switch_cls(c, Default=1.0e+08, Aer=2.0)
       Ctrl%Sx(IRe)         = switch_cls(c, Default=1.0e+08, Aer=0.5)
