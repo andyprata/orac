@@ -236,7 +236,7 @@ subroutine Read_Driver(Ctrl, global_atts, source_atts)
    Ctrl%do_CTX_correction      = .true.
    Ctrl%process_cloudy_only    = .true.
    Ctrl%process_aerosol_only   = .false.
-   Ctrl%extrap_temp_prof       = .false.  !.true.
+   Ctrl%extrap_temp_prof       = .true.
 
 
    !----------------------------------------------------------------------------
@@ -974,7 +974,7 @@ subroutine Read_Driver(Ctrl, global_atts, source_atts)
    Ctrl%X0(ISP)            = switch_app(a, Default=0.3)
    Ctrl%X0(ISG)            = switch_app(a, Default=0.3)
 
-   ! A priori uncertainty
+   ! A priori uncertainty (standard deviations)
    if (Ctrl%Approach /= AppCld2L) then
       Ctrl%Sx(ITau)        = switch_cls(c, Default=1.0e+08, Aer=2.0)
       Ctrl%Sx(IRe)         = switch_cls(c, Default=1.0e+08, Aer=0.5)
