@@ -61,5 +61,5 @@
 /tools/pyorac/*.pyc
 
 # PyCharm
-.idea
+/.idea
 
